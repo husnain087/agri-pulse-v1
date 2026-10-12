@@ -154,3 +154,11 @@
 @utility animate-float { animation: float 6s ease-in-out infinite; }
 @keyframes scan { 0% { top: -33%; } 100% { top: 100%; } }
 @utility animate-scan { animation: scan 2.2s ease-in-out infinite; }
+
+.model-data-link { position: relative; flex: 1; min-width: 12px; height: 2px; margin-bottom: 24px; background: var(--border); overflow: hidden; }
+.model-data-link span { position: absolute; inset: -2px auto -2px 0; width: 12px; background: var(--cyan); border-radius: 999px; opacity: 0; }
+.model-data-link-active { background: color-mix(in oklch, var(--primary) 25%, transparent); }
+.model-data-link-active span { animation: model-packet 1.15s linear infinite; }
+.model-data-link-active span:nth-child(2) { animation-delay: .38s; background: var(--primary); }
+.model-data-link-active span:nth-child(3) { animation-delay: .76s; background: var(--gold); }
+@keyframes model-packet { 0% { left: -12px; opacity: 0; } 12%, 88% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
