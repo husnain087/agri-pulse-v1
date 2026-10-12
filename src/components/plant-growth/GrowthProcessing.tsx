@@ -20,11 +20,12 @@ export function GrowthProcessing({ image, states }: { image: string; states: Rec
     <div className="theme-night rounded-3xl p-5 md:p-8 animate-fade-up" role="status" aria-label="Growth model processing">
       <div className="mb-6 flex items-center gap-2 border-b border-border pb-6 sm:gap-4" aria-hidden="true">
         {order.map((stage, i) => {
-          const Icon = [ImagePlus, Cpu, ChartNoAxesCombined][i];
+          const Icon = stage === "preprocess" ? ImagePlus : stage === "analyze" ? Cpu : ChartNoAxesCombined;
+          const previous = order[i - 1];
           const active = states[stage] === "active";
           const connected = states[stage] === "done" || active;
           return <div key={stage} className="contents">
-            {i > 0 && <div className={cn("model-data-link", (states[order[i - 1]] === "active" || active) && busy && "model-data-link-active")}><span /><span /><span /></div>}
+            {previous && <div className={cn("model-data-link", (states[previous] === "active" || active) && busy && "model-data-link-active")}><span /><span /><span /></div>}
             <div className="flex w-20 shrink-0 flex-col items-center gap-2 text-center sm:w-28">
               <span className={cn("grid h-12 w-12 place-items-center rounded-xl border bg-muted transition-colors", active && "glow border-primary text-primary", states[stage] === "done" && "border-primary/50 text-primary")}>
                 <Icon className={cn("h-6 w-6", active && "animate-pulse")} />
