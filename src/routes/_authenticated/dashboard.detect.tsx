@@ -8,7 +8,7 @@ import { RecordView } from "@/components/agrisense/RecordView";
 import { useDetection, startDetection, cancelDetection } from "@/lib/detection-store";
 import { useHistory } from "@/lib/history-store";
 
-export const Route = createFileRoute("/dashboard/detect")({
+export const Route = createFileRoute("/_authenticated/dashboard/detect")({
   head: () => ({
     meta: [
       { title: "New Detection — Agri Pulse" },

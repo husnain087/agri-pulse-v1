@@ -6,7 +6,7 @@ import { ChartCard, TimelineChart, DonutChart, HBarChart } from "@/components/ag
 import { useHistory } from "@/lib/history-store";
 import { computeStats } from "@/lib/analytics";
 
-export const Route = createFileRoute("/dashboard/analytics")({
+export const Route = createFileRoute("/_authenticated/dashboard/analytics")({
   head: () => ({
     meta: [
       { title: "Analytics — Agri Pulse" },

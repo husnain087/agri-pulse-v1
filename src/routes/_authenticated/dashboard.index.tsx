@@ -7,7 +7,7 @@ import { RecordRow } from "@/components/agrisense/RecentPredictions";
 import { useHistory } from "@/lib/history-store";
 import { computeStats } from "@/lib/analytics";
 
-export const Route = createFileRoute("/dashboard/")({
+export const Route = createFileRoute("/_authenticated/dashboard/")({
   head: () => ({
     meta: [
       { title: "Dashboard — Agri Pulse" },

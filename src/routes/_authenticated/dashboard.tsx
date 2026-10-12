@@ -7,7 +7,7 @@ import { useDetection, isBusy } from "@/lib/detection-store";
 import { cn } from "@/lib/utils";
 import { AccountButton } from "@/components/agrisense/AccountButton";
 
-export const Route = createFileRoute("/dashboard")({ component: DashboardLayout });
+export const Route = createFileRoute("/_authenticated/dashboard")({ component: DashboardLayout });
 
 const NAV = [
   { to: "/dashboard", label: "Overview", icon: LayoutDashboard, exact: true },

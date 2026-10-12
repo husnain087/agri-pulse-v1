@@ -7,7 +7,7 @@ import { useHistory, clearRecords } from "@/lib/history-store";
 import { API } from "@/lib/agrisense-api";
 import { MIN_MS } from "@/lib/detection-store";
 
-export const Route = createFileRoute("/dashboard/settings")({
+export const Route = createFileRoute("/_authenticated/dashboard/settings")({
   head: () => ({
     meta: [
       { title: "Settings — Agri Pulse" },

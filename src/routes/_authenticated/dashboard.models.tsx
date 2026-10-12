@@ -9,7 +9,7 @@ import { API, checkHealth, type ApiKey, type Health } from "@/lib/agrisense-api"
 import { useDetection } from "@/lib/detection-store";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/dashboard/models")({
+export const Route = createFileRoute("/_authenticated/dashboard/models")({
   head: () => ({
     meta: [
       { title: "AI Models — Agri Pulse" },
