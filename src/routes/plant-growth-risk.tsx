@@ -15,6 +15,7 @@ import { makeThumbnail } from "@/lib/history-store";
 import { loadGrowth, saveGrowth, type SavedGrowth } from "@/lib/plant-growth/growth-history";
 
 export const Route = createFileRoute("/plant-growth-risk")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Plant Growth Prediction — Agri Pulse" },

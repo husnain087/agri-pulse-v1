@@ -9,6 +9,7 @@ import { useDetection, startDetection, cancelDetection } from "@/lib/detection-s
 import { useHistory } from "@/lib/history-store";
 
 export const Route = createFileRoute("/_authenticated/dashboard/detect")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "New Detection — Agri Pulse" },

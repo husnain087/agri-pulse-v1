@@ -8,6 +8,7 @@ import { useHistory } from "@/lib/history-store";
 import { computeStats } from "@/lib/analytics";
 
 export const Route = createFileRoute("/_authenticated/dashboard/")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Dashboard — Agri Pulse" },

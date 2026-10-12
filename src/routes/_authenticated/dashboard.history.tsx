@@ -13,6 +13,7 @@ import { useHistory, deleteRecord, clearRecords } from "@/lib/history-store";
 import { prettyLabel } from "@/lib/agrisense-api";
 
 export const Route = createFileRoute("/_authenticated/dashboard/history")({
+  staticData: { sitemap: false },
   validateSearch: (s: Record<string, unknown>): { id?: string } => (typeof s["id"] === "string" ? { id: s["id"] } : {}),
   head: () => ({
     meta: [

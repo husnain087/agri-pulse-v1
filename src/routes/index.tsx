@@ -7,6 +7,7 @@ import { AccountButton } from "@/components/agrisense/AccountButton";
 import hero from "@/assets/hero-field.jpg";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Agri Pulse — Crop Disease Detection & Plant Growth Prediction" },
