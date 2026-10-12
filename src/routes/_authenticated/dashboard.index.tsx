@@ -7,12 +7,12 @@ import { RecordRow } from "@/components/agrisense/RecentPredictions";
 import { useHistory } from "@/lib/history-store";
 import { computeStats } from "@/lib/analytics";
 
-export const Route = createFileRoute("/dashboard/")({
+export const Route = createFileRoute("/_authenticated/dashboard/")({
   head: () => ({
     meta: [
-      { title: "Dashboard — AgriSense AI" },
+      { title: "Dashboard — Agri Pulse" },
       { name: "description", content: "Overview of your crop predictions, disease findings and trends." },
-      { property: "og:title", content: "Dashboard — AgriSense AI" },
+      { property: "og:title", content: "Dashboard — Agri Pulse" },
       { property: "og:description", content: "Overview of your crop predictions, disease findings and trends." },
     ],
   }),
@@ -25,7 +25,7 @@ function Overview() {
   const s = computeStats(records);
   return (
     <div className="animate-fade-up">
-      <PageHeader title="Overview" sub="All figures are calculated from predictions saved in this browser." />
+      <PageHeader title="Overview" sub="All figures are calculated from predictions saved to your account." />
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5">
         <StatCard label="Total Predictions" value={s.total} icon={Activity} />
         <StatCard label="Maize Predictions" value={s.maize} icon={Leaf} />

@@ -5,8 +5,9 @@ import { Button } from "@/components/ui/button";
 import { BrandMark } from "@/components/agrisense/BrandMark";
 import { useDetection, isBusy } from "@/lib/detection-store";
 import { cn } from "@/lib/utils";
+import { AccountButton } from "@/components/agrisense/AccountButton";
 
-export const Route = createFileRoute("/dashboard")({ component: DashboardLayout });
+export const Route = createFileRoute("/_authenticated/dashboard")({ component: DashboardLayout });
 
 const NAV = [
   { to: "/dashboard", label: "Overview", icon: LayoutDashboard, exact: true },
@@ -45,7 +46,7 @@ function DashboardLayout() {
       <aside className="theme-night sticky top-0 hidden h-screen flex-col gap-8 p-5 lg:flex">
         <BrandMark />
         <SideNav />
-        <p className="mt-auto text-xs text-muted-foreground">History is stored in this browser only.</p>
+        <p className="mt-auto text-xs text-muted-foreground">History is stored in your account only.</p>
       </aside>
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true">
@@ -63,7 +64,7 @@ function DashboardLayout() {
             <span className="lg:hidden"><BrandMark /></span>
             <p className="hidden text-sm text-muted-foreground lg:block">Crop intelligence workspace</p>
           </div>
-          <Button asChild size="sm"><Link to="/dashboard/detect"><ScanLine /> New Detection</Link></Button>
+          <div className="flex items-center gap-2"><Button asChild size="sm"><Link to="/dashboard/detect"><ScanLine /> New Detection</Link></Button><AccountButton /></div>
         </header>
         <main className={cn("mx-auto max-w-6xl px-5 py-8 md:px-8")}>
           <Outlet />

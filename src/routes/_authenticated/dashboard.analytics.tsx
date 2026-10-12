@@ -6,12 +6,12 @@ import { ChartCard, TimelineChart, DonutChart, HBarChart } from "@/components/ag
 import { useHistory } from "@/lib/history-store";
 import { computeStats } from "@/lib/analytics";
 
-export const Route = createFileRoute("/dashboard/analytics")({
+export const Route = createFileRoute("/_authenticated/dashboard/analytics")({
   head: () => ({
     meta: [
-      { title: "Analytics — AgriSense AI" },
+      { title: "Analytics — Agri Pulse" },
       { name: "description", content: "Crop distribution, disease frequency and confidence trends from your saved predictions." },
-      { property: "og:title", content: "Analytics — AgriSense AI" },
+      { property: "og:title", content: "Analytics — Agri Pulse" },
       { property: "og:description", content: "Insights derived from your saved crop predictions." },
     ],
   }),
@@ -30,7 +30,7 @@ function Analytics() {
     );
   return (
     <div className="animate-fade-up">
-      <PageHeader title="Analytics" sub="Derived only from completed predictions stored in this browser." />
+      <PageHeader title="Analytics" sub="Derived only from completed predictions stored in your account." />
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <StatCard label="Analyses completed" value={s.total} icon={Activity} />
         <StatCard label="Average confidence" value={s.avgConfidence === null ? "—" : `${s.avgConfidence.toFixed(1)}%`} icon={Gauge} />
