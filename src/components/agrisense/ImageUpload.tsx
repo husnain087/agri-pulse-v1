@@ -1,9 +1,7 @@
 import { useRef, useState } from "react";
 import { ImagePlus } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const MAX_MB = 10;
-const TYPES = ["image/jpeg", "image/png"];
+import { IMAGE_ACCEPT, MAX_UPLOAD_MB as MAX_MB, normalizeImage } from "@/lib/normalize-image";
 
 /** Drop zone — a valid selection immediately triggers `onFile` (which auto-starts analysis). */
 export function ImageUpload({ onFile }: { onFile: (f: File) => void }) {
@@ -11,18 +9,20 @@ export function ImageUpload({ onFile }: { onFile: (f: File) => void }) {
   const [drag, setDrag] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const accept = (f?: File) => {
+  const accept = async (f?: File) => {
     if (!f) return;
-    if (!TYPES.includes(f.type)) return setError("Please choose a JPG, JPEG or PNG image.");
-    if (f.size > MAX_MB * 1024 * 1024) return setError(`Image is too large — maximum ${MAX_MB} MB.`);
-    if (f.size === 0) return setError("This file is empty.");
-    setError(null);
-    onFile(f);
+    try {
+      const jpg = await normalizeImage(f);
+      setError(null);
+      onFile(jpg);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Could not read this image.");
+    }
   };
 
   return (
     <div>
-      <input ref={input} type="file" accept=".jpg,.jpeg,.png,image/jpeg,image/png" className="sr-only" aria-label="Choose crop image" onChange={(e) => { accept(e.target.files?.[0]); e.target.value = ""; }} />
+      <input ref={input} type="file" accept={IMAGE_ACCEPT} className="sr-only" aria-label="Choose crop image" onChange={(e) => { void accept(e.target.files?.[0]); e.target.value = ""; }} />
       <button
         type="button"
         onClick={() => input.current?.click()}

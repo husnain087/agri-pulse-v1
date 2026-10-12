@@ -66,10 +66,10 @@ function PlantGrowthRisk() {
   const runId = useRef(0);
   const running = Object.values(states).some((s) => s === "active");
 
-  const pick = (f?: File) => {
-    if (!f) return;
-    if (!["image/jpeg", "image/png", "image/webp"].includes(f.type)) return setFileErr("Please choose a JPG, PNG or WEBP image.");
-    if (f.size > 10 * 1024 * 1024) return setFileErr("Image is too large — maximum 10 MB.");
+  const pick = async (raw?: File) => {
+    if (!raw) return;
+    let f: File;
+    try { f = await normalizeImage(raw); } catch (e) { return setFileErr(e instanceof Error ? e.message : "Could not read this image."); }
     setFileErr(null); setFile(f); setResult(null); setStates(idle);
     if (preview) URL.revokeObjectURL(preview);
     setPreview(URL.createObjectURL(f));
