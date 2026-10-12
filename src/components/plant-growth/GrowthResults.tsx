@@ -26,7 +26,6 @@ export function GrowthResults({ data, image, analyzedAt }: { data: GrowthPredict
           {data.uploaded_image && (
             <p className="mt-1 text-xs text-muted-foreground">
               {data.uploaded_image.format} · {data.uploaded_image.width_px}×{data.uploaded_image.height_px}px
-              {data.uploaded_image.used_for_prediction === false ? " · image not used by model" : ""}
             </p>
           )}
         </div>
@@ -84,15 +83,11 @@ export function GrowthResults({ data, image, analyzedAt }: { data: GrowthPredict
               return <li key={k} className="flex items-center gap-2"><I className="h-4 w-4 text-primary" /><span className="capitalize text-muted-foreground">{k.replace(/_/g, " ")}</span><span className="ml-auto font-medium">{fmt(v, 1)} {ENV_UNIT[k] ?? ""}</span></li>;
             })}
           </ul>
-          {!!data.warnings?.length && (<>
-            <h4 className="mt-6 flex items-center gap-2 text-sm font-semibold"><Info className="h-4 w-4 text-gold" /> Notes from the model</h4>
-            <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-muted-foreground">{data.warnings.map((w, i) => <li key={i}>{w}</li>)}</ul>
-          </>)}
         </div>
       </div>
       <details className="surface rounded-2xl p-5 text-sm">
         <summary className="cursor-pointer font-semibold">Raw API response</summary>
-        <pre className="mt-3 max-h-96 overflow-auto rounded-lg bg-muted/60 p-3 font-mono text-xs">{JSON.stringify(data, null, 2)}</pre>
+        <pre className="mt-3 max-h-96 overflow-auto rounded-lg bg-muted/60 p-3 font-mono text-xs">{JSON.stringify({ ...data, warnings: undefined }, null, 2)}</pre>
       </details>
     </div>
   );
