@@ -1,4 +1,5 @@
 # Tasks
+- [ ] Match Option 1 to Option 2 and enrich live growth-model neuron/data-flow animation.
 - [x] Rename to Agri Pulse and update SEO.
 - [x] Hide growth model notes.
 - [x] Add Google/email login and private saved detection/growth results.

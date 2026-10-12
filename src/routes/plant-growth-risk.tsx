@@ -58,6 +58,10 @@ function PlantGrowthRisk() {
   const [formErr, setFormErr] = useState<string | null>(null);
   const runId = useRef(0);
   const running = Object.values(states).some((s) => s === "active");
+  const processingRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (running) processingRef.current?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "center" });
+  }, [running]);
   const accountId = useRef(user?.id);
   accountId.current = user?.id;
   useEffect(() => {
@@ -124,7 +128,7 @@ function PlantGrowthRisk() {
     if (!r.ok) { setStates({ preprocess: "done", analyze: "error", result: "pending" }); return setResult(r); }
     if (owner) {
       try {
-        const image = await makeThumbnail(preview!);
+        const image = preview ? await makeThumbnail(preview) : "";
         if (id !== runId.current || accountId.current !== owner) return;
         const record: SavedGrowth = { id: crypto.randomUUID(), at: r.at, image, fields, data: r.data };
         await saveGrowth(owner, record);
@@ -182,7 +186,7 @@ function PlantGrowthRisk() {
           </div>
         </div>
 
-        {preview && states.preprocess !== "pending" && !(result?.ok) && <GrowthProcessing image={preview} states={states} />}
+        {preview && states.preprocess !== "pending" && !(result?.ok) && <div ref={processingRef}><GrowthProcessing image={preview} states={states} /></div>}
         {result && !result.ok && (
           <div role="alert" className="surface flex flex-wrap items-center justify-between gap-3 rounded-xl p-4">
             <p className="flex items-center gap-2 text-sm"><AlertTriangle className="h-4 w-4 text-destructive" />{result.message}</p>

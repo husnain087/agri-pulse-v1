@@ -72,12 +72,13 @@ function Home() {
       <section className="mx-auto max-w-6xl px-5 pt-20">
         <h2 className="text-3xl font-bold md:text-4xl">Choose your analysis</h2>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
-          <div className="surface flex flex-col rounded-2xl p-6">
-            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Option 1 · Trained ML models</p>
-            <h3 className="mt-2 text-2xl font-semibold">Existing AI Models</h3>
+          <div className="theme-night relative flex flex-col overflow-hidden rounded-2xl p-6">
+            <div className="pointer-events-none absolute -right-10 -top-10 h-56 w-56 opacity-60" aria-hidden><NeuralBrainAnimation intensity={0.4} /></div>
+            <p className="relative font-mono text-xs uppercase tracking-widest text-primary">Option 1 · Trained ML models</p>
+            <h3 className="relative mt-2 flex items-center gap-2 text-2xl font-semibold"><ScanSearch className="h-6 w-6 shrink-0 text-primary" /> Existing AI Models</h3>
             <p className="mt-2 text-sm text-muted-foreground">Crop Identifier → Maize or Wheat Disease AI with Grad-CAM heatmaps.</p>
             <div className="mt-auto flex flex-wrap gap-3 pt-6">
-              <Button asChild><Link to="/dashboard/detect">Analyze My Crop <ArrowRight /></Link></Button>
+              <Button asChild className="bg-gradient-primary glow"><Link to="/dashboard/detect">Analyze My Crop <ArrowRight /></Link></Button>
               <Button asChild variant="outline"><Link to="/dashboard/models">View models</Link></Button>
             </div>
           </div>

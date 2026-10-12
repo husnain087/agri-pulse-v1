@@ -14,3 +14,4 @@
 - Dashboard routes are under the pathless authenticated layout. Prediction data is owner-scoped in Cloud with RLS; do not import unclaimed legacy browser history into an account automatically.
 - Growth predictions remain public to run; signed-in users' successful predictions are saved privately. Do not render model-warning notes.
 - Sitemap URLs derive from required route staticData decisions; exclude private subtrees and omit lastmod without page-specific content timestamps to prevent private or misleading search entries.
+- Growth processing visuals follow the real request stages without adding artificial model delays; shared neural visuals use canvas and semantic palette tokens for lightweight animation.
