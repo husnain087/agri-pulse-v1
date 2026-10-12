@@ -1,4 +1,3 @@
-// @ts-nocheck -- canvas math with indexed arrays; runtime-verified
 import { useEffect, useRef } from "react";
 
 /** Pseudo-3D rotating neural point cloud on canvas. `intensity` 0..1 drives pulse activity. */
@@ -8,10 +7,12 @@ export function NeuralBrainAnimation({ intensity = 0.2 }: { intensity?: number }
   intensityRef.current = intensity;
 
   useEffect(() => {
-    const canvas = ref.current!;
-    const ctx = canvas.getContext("2d")!;
+    const canvas = ref.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const N = window.innerWidth < 640 ? 160 : 280;
+    const N = window.innerWidth < 640 ? 240 : 420;
     // points on two lobes (brain-ish ellipsoid)
     const pts = Array.from({ length: N }, (_, i) => {
       const side = i % 2 ? 1 : -1;
@@ -28,6 +29,7 @@ export function NeuralBrainAnimation({ intensity = 0.2 }: { intensity?: number }
     for (let i = 0; i < N; i++)
       for (let j = i + 1; j < N; j++) {
         const a = pts[i], b = pts[j];
+        if (!a || !b) continue;
         if ((a.x - b.x) ** 2 + (a.y - b.y) ** 2 + (a.z - b.z) ** 2 < 0.035) edges.push([i, j]);
       }
     const pulses: { e: number; t: number }[] = [];
@@ -40,7 +42,7 @@ export function NeuralBrainAnimation({ intensity = 0.2 }: { intensity?: number }
     const draw = () => {
       const dpr = Math.min(window.devicePixelRatio, 2);
       const w = canvas.clientWidth, h = canvas.clientHeight;
-      if (canvas.width !== w * dpr) { canvas.width = w * dpr; canvas.height = h * dpr; }
+      if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) { canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); }
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, w, h);
       const k = intensityRef.current;
@@ -55,24 +57,41 @@ export function NeuralBrainAnimation({ intensity = 0.2 }: { intensity?: number }
       ctx.lineWidth = 0.6;
       ctx.strokeStyle = `color-mix(in oklch, ${cyan} ${12 + k * 18}%, transparent)`;
       ctx.beginPath();
-      for (const [a, b] of edges) { ctx.moveTo(proj[a].x, proj[a].y); ctx.lineTo(proj[b].x, proj[b].y); }
+      for (const [a, b] of edges) {
+        const start = proj[a], end = proj[b];
+        if (!start || !end) continue;
+        ctx.moveTo(start.x, start.y); ctx.lineTo(end.x, end.y);
+      }
       ctx.stroke();
       for (const p of proj) {
         ctx.fillStyle = `color-mix(in oklch, ${green} ${40 + p.d * 30}%, transparent)`;
         ctx.beginPath(); ctx.arc(p.x, p.y, 1.1 * p.d + 0.4, 0, Math.PI * 2); ctx.fill();
       }
-      if (!reduced && Math.random() < 0.05 + k * 0.5 && edges.length) pulses.push({ e: (Math.random() * edges.length) | 0, t: 0 });
+      if (!reduced && edges.length && Math.random() < 0.08 + k * 0.8) {
+        for (let burst = 0; burst < 1 + Math.floor(k * 4); burst++) pulses.push({ e: (Math.random() * edges.length) | 0, t: 0 });
+      }
       for (let i = pulses.length - 1; i >= 0; i--) {
-        const pu = pulses[i]; pu.t += 0.04;
+        const pu = pulses[i];
+        if (!pu) continue;
+        pu.t += 0.015 + k * 0.02;
         if (pu.t >= 1) { pulses.splice(i, 1); continue; }
-        const [a, b] = edges[pu.e];
-        const x = proj[a].x + (proj[b].x - proj[a].x) * pu.t, y = proj[a].y + (proj[b].y - proj[a].y) * pu.t;
+        const edge = edges[pu.e];
+        if (!edge) continue;
+        const start = proj[edge[0]], end = proj[edge[1]];
+        if (!start || !end) continue;
+        const x = start.x + (end.x - start.x) * pu.t, y = start.y + (end.y - start.y) * pu.t;
         ctx.shadowBlur = 10; ctx.shadowColor = i % 3 ? cyan : gold;
+        ctx.strokeStyle = i % 3 ? cyan : gold;
+        ctx.lineWidth = 1.4;
+        ctx.beginPath();
+        const tail = Math.max(0, pu.t - 0.3);
+        ctx.moveTo(start.x + (end.x - start.x) * tail, start.y + (end.y - start.y) * tail);
+        ctx.lineTo(x, y); ctx.stroke();
         ctx.fillStyle = i % 3 ? cyan : gold;
         ctx.beginPath(); ctx.arc(x, y, 1.8, 0, Math.PI * 2); ctx.fill();
         ctx.shadowBlur = 0;
       }
-      raf = requestAnimationFrame(draw);
+      if (!reduced) raf = requestAnimationFrame(draw);
     };
     draw();
     return () => cancelAnimationFrame(raf);
