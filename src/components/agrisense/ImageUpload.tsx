@@ -36,7 +36,7 @@ export function ImageUpload({ onFile }: { onFile: (f: File) => void }) {
       >
         <span className="grid h-16 w-16 place-items-center rounded-2xl bg-gradient-primary text-primary-foreground"><ImagePlus className="h-8 w-8" /></span>
         <span className="font-display text-xl font-semibold">Drop a maize or wheat leaf image</span>
-        <span className="max-w-sm text-center text-sm text-muted-foreground">Analysis starts automatically as soon as you choose a photo. JPG, JPEG or PNG · up to {MAX_MB} MB</span>
+        <span className="max-w-sm text-center text-sm text-muted-foreground">Analysis starts automatically as soon as you choose a photo. Any photo type (JPG, PNG, WEBP, HEIC, GIF…) · up to {MAX_MB} MB</span>
         <span className="rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground">Browse Image</span>
       </button>
       {error && <p role="alert" className="mt-3 text-sm text-destructive">{error}</p>}

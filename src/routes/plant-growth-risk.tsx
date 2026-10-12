@@ -1,3 +1,4 @@
+import { IMAGE_ACCEPT, normalizeImage } from "@/lib/normalize-image";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { Sprout, ImagePlus, RotateCcw, ArrowLeft, AlertTriangle } from "lucide-react";
@@ -122,7 +123,7 @@ function PlantGrowthRisk() {
       <main className="mx-auto max-w-6xl space-y-8 px-5 py-10">
         <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
           <div className="surface rounded-2xl p-5">
-            <input ref={input} type="file" accept="image/jpeg,image/png,image/webp" className="sr-only" aria-label="Choose plant image" onChange={(e) => { pick(e.target.files?.[0]); e.target.value = ""; }} />
+            <input ref={input} type="file" accept={IMAGE_ACCEPT} className="sr-only" aria-label="Choose plant image" onChange={(e) => { void pick(e.target.files?.[0]); e.target.value = ""; }} />
             <button type="button" onClick={() => input.current?.click()} onDragOver={(e) => e.preventDefault()} onDrop={(e) => { e.preventDefault(); pick(e.dataTransfer.files[0]); }}
               className="flex aspect-square w-full flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border-2 border-dashed transition-colors hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
               {preview ? <img src={preview} alt="Selected plant" className="h-full w-full object-cover" /> : (<>
