@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as PlantGrowthRiskRouteImport } from './routes/plant-growth-risk'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
 import { Route as AuthenticatedDashboardAnalyticsRouteImport } from './routes/_authenticated/dashboard.analytics'
@@ -38,6 +39,11 @@ const AuthRoute = AuthRouteImport.update({
 const PlantGrowthRiskRoute = PlantGrowthRiskRouteImport.update({
   id: '/plant-growth-risk',
   path: '/plant-growth-risk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
@@ -86,6 +92,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/plant-growth-risk': typeof PlantGrowthRiskRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/dashboard/analytics': typeof AuthenticatedDashboardAnalyticsRoute
   '/dashboard/detect': typeof AuthenticatedDashboardDetectRoute
@@ -98,6 +105,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/plant-growth-risk': typeof PlantGrowthRiskRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/dashboard/analytics': typeof AuthenticatedDashboardAnalyticsRoute
   '/dashboard/detect': typeof AuthenticatedDashboardDetectRoute
   '/dashboard/history': typeof AuthenticatedDashboardHistoryRoute
@@ -111,6 +119,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/plant-growth-risk': typeof PlantGrowthRiskRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/_authenticated/dashboard/analytics': typeof AuthenticatedDashboardAnalyticsRoute
   '/_authenticated/dashboard/detect': typeof AuthenticatedDashboardDetectRoute
@@ -125,6 +134,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/plant-growth-risk'
+    | '/sitemap.xml'
     | '/dashboard'
     | '/dashboard/analytics'
     | '/dashboard/detect'
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/plant-growth-risk'
+    | '/sitemap.xml'
     | '/dashboard/analytics'
     | '/dashboard/detect'
     | '/dashboard/history'
@@ -149,6 +160,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/plant-growth-risk'
+    | '/sitemap.xml'
     | '/_authenticated/dashboard'
     | '/_authenticated/dashboard/analytics'
     | '/_authenticated/dashboard/detect'
@@ -163,6 +175,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   PlantGrowthRiskRoute: typeof PlantGrowthRiskRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -193,6 +206,13 @@ declare module '@tanstack/react-router' {
       path: '/plant-growth-risk'
       fullPath: '/plant-growth-risk'
       preLoaderRoute: typeof PlantGrowthRiskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/dashboard': {
@@ -287,6 +307,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   PlantGrowthRiskRoute: PlantGrowthRiskRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
