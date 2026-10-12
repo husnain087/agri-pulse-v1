@@ -10,33 +10,133 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as PlantGrowthRiskRouteImport } from './routes/plant-growth-risk'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
+import { Route as DashboardDetectRouteImport } from './routes/dashboard.detect'
+import { Route as DashboardHistoryRouteImport } from './routes/dashboard.history'
+import { Route as DashboardModelsRouteImport } from './routes/dashboard.models'
+import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlantGrowthRiskRoute = PlantGrowthRiskRouteImport.update({
+  id: '/plant-growth-risk',
+  path: '/plant-growth-risk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAnalyticsRoute = DashboardAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardDetectRoute = DashboardDetectRouteImport.update({
+  id: '/detect',
+  path: '/detect',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardHistoryRoute = DashboardHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardModelsRoute = DashboardModelsRouteImport.update({
+  id: '/models',
+  path: '/models',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => DashboardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/plant-growth-risk': typeof PlantGrowthRiskRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/detect': typeof DashboardDetectRoute
+  '/dashboard/history': typeof DashboardHistoryRoute
+  '/dashboard/models': typeof DashboardModelsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/plant-growth-risk': typeof PlantGrowthRiskRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/detect': typeof DashboardDetectRoute
+  '/dashboard/history': typeof DashboardHistoryRoute
+  '/dashboard/models': typeof DashboardModelsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/plant-growth-risk': typeof PlantGrowthRiskRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/detect': typeof DashboardDetectRoute
+  '/dashboard/history': typeof DashboardHistoryRoute
+  '/dashboard/models': typeof DashboardModelsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/plant-growth-risk'
+    | '/dashboard/analytics'
+    | '/dashboard/detect'
+    | '/dashboard/history'
+    | '/dashboard/models'
+    | '/dashboard/settings'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/plant-growth-risk'
+    | '/dashboard/analytics'
+    | '/dashboard/detect'
+    | '/dashboard/history'
+    | '/dashboard/models'
+    | '/dashboard/settings'
+    | '/dashboard'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/plant-growth-risk'
+    | '/dashboard/analytics'
+    | '/dashboard/detect'
+    | '/dashboard/history'
+    | '/dashboard/models'
+    | '/dashboard/settings'
+    | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
+  PlantGrowthRiskRoute: typeof PlantGrowthRiskRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +148,91 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plant-growth-risk': {
+      id: '/plant-growth-risk'
+      path: '/plant-growth-risk'
+      fullPath: '/plant-growth-risk'
+      preLoaderRoute: typeof PlantGrowthRiskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/analytics': {
+      id: '/dashboard/analytics'
+      path: '/analytics'
+      fullPath: '/dashboard/analytics'
+      preLoaderRoute: typeof DashboardAnalyticsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/detect': {
+      id: '/dashboard/detect'
+      path: '/detect'
+      fullPath: '/dashboard/detect'
+      preLoaderRoute: typeof DashboardDetectRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/history': {
+      id: '/dashboard/history'
+      path: '/history'
+      fullPath: '/dashboard/history'
+      preLoaderRoute: typeof DashboardHistoryRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/models': {
+      id: '/dashboard/models'
+      path: '/models'
+      fullPath: '/dashboard/models'
+      preLoaderRoute: typeof DashboardModelsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/settings': {
+      id: '/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof DashboardSettingsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
   }
 }
 
+interface DashboardRouteChildren {
+  DashboardAnalyticsRoute: typeof DashboardAnalyticsRoute
+  DashboardDetectRoute: typeof DashboardDetectRoute
+  DashboardHistoryRoute: typeof DashboardHistoryRoute
+  DashboardModelsRoute: typeof DashboardModelsRoute
+  DashboardSettingsRoute: typeof DashboardSettingsRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAnalyticsRoute: DashboardAnalyticsRoute,
+  DashboardDetectRoute: DashboardDetectRoute,
+  DashboardHistoryRoute: DashboardHistoryRoute,
+  DashboardModelsRoute: DashboardModelsRoute,
+  DashboardSettingsRoute: DashboardSettingsRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRouteWithChildren,
+  PlantGrowthRiskRoute: PlantGrowthRiskRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
