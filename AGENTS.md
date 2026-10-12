@@ -13,3 +13,4 @@
 - Google uses the managed Lovable OAuth helper; email signup requires confirmation. A single root auth listener updates session UI and clears private state on identity changes.
 - Dashboard routes are under the pathless authenticated layout. Prediction data is owner-scoped in Cloud with RLS; do not import unclaimed legacy browser history into an account automatically.
 - Growth predictions remain public to run; signed-in users' successful predictions are saved privately. Do not render model-warning notes.
+- Sitemap URLs derive from required route staticData decisions; exclude private subtrees and omit lastmod without page-specific content timestamps to prevent private or misleading search entries.

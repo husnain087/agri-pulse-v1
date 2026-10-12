@@ -8,6 +8,7 @@ import { API } from "@/lib/agrisense-api";
 import { MIN_MS } from "@/lib/detection-store";
 
 export const Route = createFileRoute("/_authenticated/dashboard/settings")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Settings — Agri Pulse" },
