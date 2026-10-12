@@ -34,7 +34,7 @@ export async function normalizeImage(file: File, max = 2048): Promise<File> {
     if (!isHeic(file)) throw new Error("This image format couldn't be opened. Try saving it as JPG or PNG.");
     const { default: heic2any } = await import("heic2any");
     const out = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.9 });
-    source = Array.isArray(out) ? out[0] : out;
+    source = (Array.isArray(out) ? out[0] : out) ?? file;
     img = await loadImage(source);
   }
 

@@ -124,12 +124,12 @@ function PlantGrowthRisk() {
         <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
           <div className="surface rounded-2xl p-5">
             <input ref={input} type="file" accept={IMAGE_ACCEPT} className="sr-only" aria-label="Choose plant image" onChange={(e) => { void pick(e.target.files?.[0]); e.target.value = ""; }} />
-            <button type="button" onClick={() => input.current?.click()} onDragOver={(e) => e.preventDefault()} onDrop={(e) => { e.preventDefault(); pick(e.dataTransfer.files[0]); }}
+            <button type="button" onClick={() => input.current?.click()} onDragOver={(e) => e.preventDefault()} onDrop={(e) => { e.preventDefault(); void pick(e.dataTransfer.files[0]); }}
               className="flex aspect-square w-full flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border-2 border-dashed transition-colors hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
               {preview ? <img src={preview} alt="Selected plant" className="h-full w-full object-cover" /> : (<>
                 <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-primary text-primary-foreground"><ImagePlus className="h-7 w-7" /></span>
                 <span className="font-semibold">Upload a plant photo</span>
-                <span className="text-xs text-muted-foreground">JPG, PNG or WEBP · up to 10 MB</span>
+                <span className="text-xs text-muted-foreground">Any photo type (JPG, PNG, WEBP, HEIC…) · up to 50 MB</span>
               </>)}
             </button>
             {fileErr && <p role="alert" className="mt-2 text-sm text-destructive">{fileErr}</p>}
