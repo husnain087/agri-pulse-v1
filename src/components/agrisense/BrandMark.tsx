@@ -5,7 +5,7 @@ export function BrandMark() {
   return (
     <Link to="/" className="flex items-center gap-2 font-display text-lg font-bold">
       <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground"><Brain className="h-5 w-5" /></span>
-      AgriSense <span className="text-primary">AI</span>
+      Agri <span className="text-primary">Pulse</span>
     </Link>
   );
 }

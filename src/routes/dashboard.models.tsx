@@ -12,10 +12,10 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/dashboard/models")({
   head: () => ({
     meta: [
-      { title: "AI Models — AgriSense AI" },
+      { title: "AI Models — Agri Pulse" },
       { name: "description", content: "Live availability and run status of the crop identifier, maize and wheat disease models." },
-      { property: "og:title", content: "AI Models — AgriSense AI" },
-      { property: "og:description", content: "Live status of the three AgriSense AI models." },
+      { property: "og:title", content: "AI Models — Agri Pulse" },
+      { property: "og:description", content: "Live status of the three Agri Pulse models." },
     ],
   }),
   component: Models,

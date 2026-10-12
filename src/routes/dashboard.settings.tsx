@@ -11,10 +11,10 @@ import { MIN_MS } from "@/lib/detection-store";
 export const Route = createFileRoute("/dashboard/settings")({
   head: () => ({
     meta: [
-      { title: "Settings — AgriSense AI" },
-      { name: "description", content: "Manage local prediction storage and view AgriSense AI service configuration." },
-      { property: "og:title", content: "Settings — AgriSense AI" },
-      { property: "og:description", content: "Manage AgriSense AI storage and configuration." },
+      { title: "Settings — Agri Pulse" },
+      { name: "description", content: "Manage local prediction storage and view Agri Pulse service configuration." },
+      { property: "og:title", content: "Settings — Agri Pulse" },
+      { property: "og:description", content: "Manage Agri Pulse storage and configuration." },
     ],
   }),
   component: SettingsPage,
@@ -31,7 +31,7 @@ function SettingsPage() {
       <PageHeader title="Settings" />
       <section className="surface rounded-2xl p-6">
         <h2 className="flex items-center gap-2 text-lg font-semibold"><HardDrive className="h-5 w-5 text-primary" /> Local storage</h2>
-        <p className="mt-2 text-sm text-muted-foreground">{records.length} predictions saved in this browser. {usage ?? ""}</p>
+        <p className="mt-2 text-sm text-muted-foreground">{records.length} predictions saved to your account. {usage ?? ""}</p>
         <p className="mt-1 text-sm text-muted-foreground">History lives only on this device and browser — it is not synced to an account.</p>
         <AlertDialog>
           <AlertDialogTrigger asChild><Button variant="outline" className="mt-4 text-destructive" disabled={!records.length}><Trash2 /> Clear all history</Button></AlertDialogTrigger>

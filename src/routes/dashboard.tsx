@@ -45,7 +45,7 @@ function DashboardLayout() {
       <aside className="theme-night sticky top-0 hidden h-screen flex-col gap-8 p-5 lg:flex">
         <BrandMark />
         <SideNav />
-        <p className="mt-auto text-xs text-muted-foreground">History is stored in this browser only.</p>
+        <p className="mt-auto text-xs text-muted-foreground">History is stored in your account only.</p>
       </aside>
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true">

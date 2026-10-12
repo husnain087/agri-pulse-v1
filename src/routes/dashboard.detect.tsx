@@ -11,9 +11,9 @@ import { useHistory } from "@/lib/history-store";
 export const Route = createFileRoute("/dashboard/detect")({
   head: () => ({
     meta: [
-      { title: "New Detection — AgriSense AI" },
-      { name: "description", content: "Upload a crop image — AgriSense AI identifies the crop and detects disease automatically." },
-      { property: "og:title", content: "New Detection — AgriSense AI" },
+      { title: "New Detection — Agri Pulse" },
+      { name: "description", content: "Upload a crop image — Agri Pulse identifies the crop and detects disease automatically." },
+      { property: "og:title", content: "New Detection — Agri Pulse" },
       { property: "og:description", content: "Upload a crop image and watch the AI pipeline work automatically." },
     ],
   }),

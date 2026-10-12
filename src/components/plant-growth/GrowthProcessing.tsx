@@ -42,7 +42,7 @@ export function GrowthProcessing({ image, states }: { image: string; states: Rec
           <div className="mt-4 flex gap-2" aria-label={`Step ${done} of 3`}>
             {order.map((s, i) => <div key={s} className={cn("h-1.5 flex-1 rounded-full transition-colors", i < done ? "bg-gradient-primary" : "bg-muted")} />)}
           </div>
-          <p className="mt-2 text-center font-mono text-xs text-muted-foreground">Step {done} / 3 · AgriSense growth model</p>
+          <p className="mt-2 text-center font-mono text-xs text-muted-foreground">Step {done} / 3 · Agri Pulse growth model</p>
         </div>
       </div>
     </div>

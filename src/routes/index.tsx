@@ -3,15 +3,16 @@ import { Sprout, ArrowRight, ScanSearch, Bug, GitBranch, Flame, History, Activit
 import { Button } from "@/components/ui/button";
 import { BrandMark } from "@/components/agrisense/BrandMark";
 import { NeuralBrainAnimation } from "@/components/agrisense/NeuralBrainAnimation";
+import { AccountButton } from "@/components/agrisense/AccountButton";
 import hero from "@/assets/hero-field.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AgriSense AI — Smarter Farming Starts with AI" },
-      { name: "description", content: "Identify crops, detect maize and wheat diseases, and visualize AI predictions with Grad-CAM heatmaps." },
-      { property: "og:title", content: "AgriSense AI — Smarter Farming Starts with AI" },
-      { property: "og:description", content: "Identify crops, detect diseases, and visualize AI predictions with intelligent crop analysis." },
+      { title: "Agri Pulse — Crop Disease Detection & Plant Growth Prediction" },
+      { name: "description", content: "Agri Pulse identifies maize and wheat, detects crop diseases with heatmaps, and predicts plant growth rates and future heights." },
+      { property: "og:title", content: "Agri Pulse — Crop Disease Detection & Plant Growth Prediction" },
+      { property: "og:description", content: "Identify crops, detect maize and wheat diseases, and predict plant growth with Agri Pulse." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -24,7 +25,7 @@ const FEATURES = [
   { icon: Bug, t: "Automatic Disease Detection", d: "Specialist models diagnose blight, rusts, leaf spot, septoria and more." },
   { icon: GitBranch, t: "Intelligent Model Routing", d: "Your image is sent only to the disease model that matches the identified crop." },
   { icon: Flame, t: "Grad-CAM Heatmaps", d: "See which leaf regions influenced the prediction, side by side with your photo." },
-  { icon: History, t: "Prediction History", d: "Every completed analysis is saved in your browser, searchable and filterable." },
+  { icon: History, t: "Prediction History", d: "Every completed analysis is saved to your account, searchable and filterable." },
   { icon: Activity, t: "Real-Time Analysis Status", d: "A live neural pipeline shows exactly which model is working, step by step." },
 ];
 
@@ -44,13 +45,13 @@ function Home() {
             <a href="#how" className="hover:text-foreground">How It Works</a>
             <Link to="/dashboard/models" className="hover:text-foreground">AI Models</Link>
           </nav>
-          <Button asChild size="sm" variant="outline"><Link to="/dashboard">Dashboard</Link></Button>
+          <div className="flex items-center gap-2"><Button asChild size="sm" variant="outline"><Link to="/dashboard">Dashboard</Link></Button><AccountButton /></div>
         </header>
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-24 pt-12 lg:grid-cols-[1.1fr_1fr] lg:pt-20">
           <div className="animate-fade-up">
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary">AgriSense AI</p>
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary">Agri Pulse</p>
             <h1 className="mt-4 text-5xl font-bold leading-[1.05] md:text-6xl">Smarter Farming Starts with <span className="text-gradient">AI</span></h1>
-            <p className="mt-6 max-w-xl text-lg text-muted-foreground">Identify crops, detect diseases, and visualize AI predictions with intelligent crop analysis.</p>
+            <p className="mt-6 max-w-xl text-lg text-muted-foreground">Identify crops, detect maize and wheat diseases, and predict plant growth with Agri Pulse.</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg" className="bg-gradient-primary glow"><Link to="/dashboard/detect">Analyze My Crop <ArrowRight /></Link></Button>
               <Button asChild size="lg" variant="outline"><Link to="/dashboard">Explore Dashboard</Link></Button>
@@ -83,7 +84,7 @@ function Home() {
             <div className="pointer-events-none absolute -right-10 -top-10 h-56 w-56 opacity-60" aria-hidden><NeuralBrainAnimation intensity={0.4} /></div>
             <p className="font-mono text-xs uppercase tracking-widest text-primary">Option 2 · Growth Model</p>
             <h3 className="mt-2 flex items-center gap-2 text-2xl font-semibold"><Sprout className="h-6 w-6 text-primary" /> Plant Growth Risk &amp; Prediction AI</h3>
-            <p className="mt-2 max-w-sm text-sm text-muted-foreground">Predict growth rate and future height with the trained AgriSense growth model.</p>
+            <p className="mt-2 max-w-sm text-sm text-muted-foreground">Predict growth rate and future height with the trained Agri Pulse growth model.</p>
             <div className="mt-auto pt-6"><Button asChild className="bg-gradient-primary glow"><Link to="/plant-growth-risk"><Sprout /> Detect Growth Risk</Link></Button></div>
           </div>
         </div>

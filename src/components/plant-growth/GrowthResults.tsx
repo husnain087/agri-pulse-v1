@@ -17,7 +17,7 @@ export function GrowthResults({ data, image, analyzedAt }: { data: GrowthPredict
     <div className="space-y-6 animate-fade-up">
       <div className="flex items-start gap-3 rounded-2xl border border-primary/40 bg-primary/10 p-4 text-sm">
         <Cpu className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-        <p><strong>Prediction from the trained AgriSense growth model</strong>{data.model_name ? ` (${data.model_name})` : ""}.</p>
+        <p><strong>Prediction from the trained Agri Pulse growth model</strong>{data.model_name ? ` (${data.model_name})` : ""}.</p>
       </div>
       <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr]">
         <div className="surface rounded-2xl p-5">

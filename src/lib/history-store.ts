@@ -1,6 +1,8 @@
-// Prediction history persisted in this browser's IndexedDB (not shared across devices).
+// Prediction history persisted privately against the authenticated account.
 import { useSyncExternalStore } from "react";
 import type { Crop } from "./agrisense-api";
+import { supabase } from "@/integrations/supabase/client";
+import type { Json } from "@/integrations/supabase/types";
 
 export interface PredictionRecord {
   id: string;
@@ -20,7 +22,8 @@ export interface PredictionRecord {
 
 export const isHealthy = (r: Pick<PredictionRecord, "disease">) => r.disease.trim().toLowerCase() === "healthy";
 
-const DB = "agrisense", STORE = "predictions";
+let owner: string | null = null;
+let generation = 0;
 let records: PredictionRecord[] = [];
 let loaded = false;
 let storageError = null as string | null;
@@ -28,51 +31,55 @@ const listeners = new Set<() => void>();
 let snapshot: { records: PredictionRecord[]; loaded: boolean; storageError: string | null } = { records, loaded, storageError };
 const emit = () => { snapshot = { records, loaded, storageError }; listeners.forEach((l) => l()); };
 
-function open(): Promise<IDBDatabase> {
-  return new Promise((res, rej) => {
-    const r = indexedDB.open(DB, 1);
-    r.onupgradeneeded = () => r.result.createObjectStore(STORE, { keyPath: "id" });
-    r.onsuccess = () => res(r.result);
-    r.onerror = () => rej(r.error);
-  });
-}
-async function tx<T>(mode: IDBTransactionMode, fn: (s: IDBObjectStore) => IDBRequest<T>): Promise<T> {
-  const db = await open();
-  return new Promise((res, rej) => {
-    const t = db.transaction(STORE, mode);
-    const req = fn(t.objectStore(STORE));
-    t.oncomplete = () => res(req.result);
-    t.onerror = () => rej(t.error);
-    t.onabort = () => rej(t.error);
-  });
-}
-
 let loading: Promise<void> | null = null;
 function ensureLoaded() {
-  if (loading || typeof indexedDB === "undefined") return;
-  loading = tx<PredictionRecord[]>("readonly", (s) => s.getAll() as IDBRequest<PredictionRecord[]>)
-    .then((all) => { records = all.sort((a, b) => b.createdAt - a.createdAt); })
-    .catch(() => { storageError = "Browser storage is unavailable — history can't be saved in this browser."; })
-    .finally(() => { loaded = true; emit(); });
+  if (loading || !owner || loaded) return;
+  const id = generation;
+  loading = (async () => {
+    const { data, error } = await supabase.from("predictions").select("payload").eq("user_id", owner!).eq("kind", "detection").order("created_at", { ascending: false });
+    if (id !== generation) return;
+    if (error) storageError = "Couldn't load your saved predictions. Please refresh to retry.";
+    else records = (data ?? []).map((r) => r.payload as unknown as PredictionRecord);
+    loaded = true; loading = null; emit();
+  })();
 }
 
-export async function addRecord(r: PredictionRecord) {
+export function setHistoryOwner(id: string | null) {
+  if (owner === id) return;
+  owner = id; generation++; records = []; loaded = !id; loading = null; storageError = null; emit();
+  ensureLoaded();
+}
+
+export async function addRecord(r: PredictionRecord, userId = owner) {
+  const version = generation;
   try {
-    await tx("readwrite", (s) => s.put(r));
+    if (!userId || userId !== owner) throw new Error("Sign in to save predictions.");
+    const { error } = await supabase.from("predictions").insert({ id: r.id, user_id: userId, kind: "detection", payload: JSON.parse(JSON.stringify(r)) as Json, created_at: new Date(r.createdAt).toISOString() });
+    if (error) throw error;
+    if (version !== generation) return;
     records = [r, ...records.filter((x) => x.id !== r.id)];
     storageError = null;
   } catch {
-    storageError = "Couldn't save this prediction — browser storage may be full. Delete old records to free space.";
+    if (version !== generation) return;
+    storageError = "Couldn't save this prediction to your account. Please check your connection and try again.";
   }
   emit();
 }
 export async function deleteRecord(id: string) {
-  await tx("readwrite", (s) => s.delete(id)).catch(() => {});
+  if (!owner) return;
+  const version = generation;
+  const { error } = await supabase.from("predictions").delete().eq("id", id).eq("user_id", owner).eq("kind", "detection");
+  if (version !== generation) return;
+  if (error) { storageError = "Couldn't delete this prediction. Please try again."; emit(); return; }
   records = records.filter((r) => r.id !== id);
   emit();
 }
 export async function clearRecords() {
-  await tx("readwrite", (s) => s.clear()).catch(() => {});
+  if (!owner) return;
+  const version = generation;
+  const { error } = await supabase.from("predictions").delete().eq("user_id", owner).eq("kind", "detection");
+  if (version !== generation) return;
+  if (error) { storageError = "Couldn't clear your history. Please try again."; emit(); return; }
   records = [];
   emit();
 }

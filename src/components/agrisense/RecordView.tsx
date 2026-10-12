@@ -72,7 +72,7 @@ export async function downloadReport(r: PredictionRecord, original: string) {
   const col = (n: string) => css.getPropertyValue(n).trim();
   x.fillStyle = col("--card"); x.fillRect(0, 0, W, H);
   x.fillStyle = col("--primary"); x.fillRect(0, 0, W, 8);
-  x.fillStyle = col("--foreground"); x.font = "700 34px 'Space Grotesk', sans-serif"; x.fillText("AgriSense AI — Prediction Report", 48, 70);
+  x.fillStyle = col("--foreground"); x.font = "700 34px 'Space Grotesk', sans-serif"; x.fillText("Agri Pulse — Prediction Report", 48, 70);
   x.font = "16px 'DM Sans', sans-serif"; x.fillStyle = col("--muted-foreground"); x.fillText(fmtDate(r.createdAt), 48, 100);
   const o = await loadImg(original); x.drawImage(o, 48, 130, 420, 420);
   if (r.heatmap) { const h = await loadImg(r.heatmap); x.drawImage(h, 492, 130, 420, 420); }
@@ -85,7 +85,7 @@ export async function downloadReport(r: PredictionRecord, original: string) {
   });
   x.fillStyle = col("--muted-foreground"); x.font = "13px 'DM Sans', sans-serif";
   x.fillText("Heatmaps show regions influencing the model's prediction and are not a definitive diagnosis.", 48, 640);
-  x.fillText("Generated in-browser from live model responses · Powered by AgriSense AI", 48, 665);
+  x.fillText("Generated in-browser from live model responses · Powered by Agri Pulse", 48, 665);
   const a = document.createElement("a");
   a.href = c.toDataURL("image/png"); a.download = `agrisense-${r.crop.toLowerCase()}-${r.createdAt}.png`; a.click();
 }

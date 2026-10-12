@@ -13,10 +13,10 @@ import { checkGrowthHealth, predictGrowth, type GrowthFields, type GrowthResult 
 export const Route = createFileRoute("/plant-growth-risk")({
   head: () => ({
     meta: [
-      { title: "Plant Growth Prediction — AgriSense AI" },
-      { name: "description", content: "Predict plant growth rate and future height with the trained AgriSense growth model." },
-      { property: "og:title", content: "Plant Growth Prediction — AgriSense AI" },
-      { property: "og:description", content: "Growth rate and future height predictions from the AgriSense ML model." },
+      { title: "Plant Growth Prediction — Agri Pulse" },
+      { name: "description", content: "Predict plant growth rate and future height with the trained Agri Pulse growth model." },
+      { property: "og:title", content: "Plant Growth Prediction — Agri Pulse" },
+      { property: "og:description", content: "Growth rate and future height predictions from the Agri Pulse ML model." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -111,7 +111,7 @@ function PlantGrowthRisk() {
         <div className="mx-auto max-w-6xl px-5 pb-14 pt-6">
           <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-primary"><Sprout className="h-4 w-4" /> Option 2</p>
           <h1 className="mt-3 text-4xl font-bold md:text-5xl">Plant Growth Risk &amp; Prediction AI</h1>
-          <p className="mt-3 max-w-2xl text-muted-foreground">Growth rate and future height predicted by the trained AgriSense growth model.</p>
+          <p className="mt-3 max-w-2xl text-muted-foreground">Growth rate and future height predicted by the trained Agri Pulse growth model.</p>
         </div>
       </header>
 
