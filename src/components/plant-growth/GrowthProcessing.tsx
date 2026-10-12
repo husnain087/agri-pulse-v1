@@ -6,7 +6,7 @@ export type GrowthStage = "preprocess" | "analyze" | "result";
 export type StageState = "pending" | "active" | "done" | "error";
 
 const LABELS: Record<GrowthStage, string> = {
-  preprocess: "Image preprocessing",
+  preprocess: "Model health check",
   analyze: "Growth model prediction",
   result: "Result generation",
 };
