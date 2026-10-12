@@ -39,7 +39,11 @@ function ensureLoaded() {
     const { data, error } = await supabase.from("predictions").select("payload").eq("user_id", owner!).eq("kind", "detection").order("created_at", { ascending: false });
     if (id !== generation) return;
     if (error) storageError = "Couldn't load your saved predictions. Please refresh to retry.";
-    else records = (data ?? []).map((r) => r.payload as unknown as PredictionRecord);
+    else {
+      const all = new Map((data ?? []).map((r) => { const record = r.payload as unknown as PredictionRecord; return [record.id, record] as const; }));
+      records.forEach((r) => all.set(r.id, r));
+      records = [...all.values()].sort((a, b) => b.createdAt - a.createdAt);
+    }
     loaded = true; loading = null; emit();
   })();
 }
@@ -72,6 +76,7 @@ export async function deleteRecord(id: string) {
   if (version !== generation) return;
   if (error) { storageError = "Couldn't delete this prediction. Please try again."; emit(); return; }
   records = records.filter((r) => r.id !== id);
+  storageError = null;
   emit();
 }
 export async function clearRecords() {
@@ -81,6 +86,7 @@ export async function clearRecords() {
   if (version !== generation) return;
   if (error) { storageError = "Couldn't clear your history. Please try again."; emit(); return; }
   records = [];
+  storageError = null;
   emit();
 }
 

@@ -9,3 +9,7 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 - Plant growth prediction calls the external FastAPI growth model directly from the browser (multipart /predict, CORS open); no AI gateway is used for it — the user requires real model output.
+- Public branding is Agri Pulse. Keep the existing layout and disease model pipeline intact.
+- Google uses the managed Lovable OAuth helper; email signup requires confirmation. A single root auth listener updates session UI and clears private state on identity changes.
+- Dashboard routes are under the pathless authenticated layout. Prediction data is owner-scoped in Cloud with RLS; do not import unclaimed legacy browser history into an account automatically.
+- Growth predictions remain public to run; signed-in users' successful predictions are saved privately. Do not render model-warning notes.

@@ -26,7 +26,7 @@ export const Route = createFileRoute("/_authenticated/dashboard/history")({
 });
 
 function HistoryPage() {
-  const { records, loaded } = useHistory();
+  const { records, loaded, storageError } = useHistory();
   const { id } = Route.useSearch();
   const nav = useNavigate({ from: Route.fullPath });
   const [q, setQ] = useState("");
@@ -52,6 +52,7 @@ function HistoryPage() {
   return (
     <div className="animate-fade-up">
       <PageHeader title="Prediction History" sub="Completed predictions stored in your account. Available across devices when you sign in." />
+      {storageError && <p role="alert" className="mb-4 rounded-xl bg-muted p-3 text-sm text-destructive">{storageError}</p>}
       {loaded && records.length === 0 ? (
         <EmptyState title="Your history is empty" body="Every completed analysis is saved here automatically." action={<Button asChild><Link to="/dashboard/detect"><ScanLine /> Start a detection</Link></Button>} />
       ) : (
