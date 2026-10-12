@@ -81,7 +81,7 @@ function Home() {
           </div>
           <div className="theme-night relative flex flex-col overflow-hidden rounded-2xl p-6">
             <div className="pointer-events-none absolute -right-10 -top-10 h-56 w-56 opacity-60" aria-hidden><NeuralBrainAnimation intensity={0.4} /></div>
-            <p className="font-mono text-xs uppercase tracking-widest text-primary">Option 2 · Lovable AI</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-primary">Option 2 · Growth Model</p>
             <h3 className="mt-2 flex items-center gap-2 text-2xl font-semibold"><Sprout className="h-6 w-6 text-primary" /> Plant Growth Risk &amp; Prediction AI</h3>
             <p className="mt-2 max-w-sm text-sm text-muted-foreground">Preliminary AI assessment of growth stage, stress signs and growth risks from a plant photo.</p>
             <div className="mt-auto pt-6"><Button asChild className="bg-gradient-primary glow"><Link to="/plant-growth-risk"><Sprout /> Detect Growth Risk</Link></Button></div>
