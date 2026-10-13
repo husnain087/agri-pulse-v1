@@ -6,6 +6,7 @@ const UPSTREAM = "https://orange-disease-api.fastapicloud.dev/predict";
 const MAX_BYTES = 15 * 1024 * 1024;
 
 export const Route = createFileRoute("/api/public/orange-predict")({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       POST: async ({ request }) => {
