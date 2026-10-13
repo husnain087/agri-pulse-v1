@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as OrangeDiseaseDetectionRouteImport } from './routes/orange-disease-detection'
 import { Route as PlantGrowthRiskRouteImport } from './routes/plant-growth-risk'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
@@ -21,6 +22,7 @@ import { Route as AuthenticatedDashboardDetectRouteImport } from './routes/_auth
 import { Route as AuthenticatedDashboardHistoryRouteImport } from './routes/_authenticated/dashboard.history'
 import { Route as AuthenticatedDashboardModelsRouteImport } from './routes/_authenticated/dashboard.models'
 import { Route as AuthenticatedDashboardSettingsRouteImport } from './routes/_authenticated/dashboard.settings'
+import { Route as ApiPublicOrangePredictRouteImport } from './routes/api/public/orange-predict'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,6 +36,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrangeDiseaseDetectionRoute = OrangeDiseaseDetectionRouteImport.update({
+  id: '/orange-disease-detection',
+  path: '/orange-disease-detection',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlantGrowthRiskRoute = PlantGrowthRiskRouteImport.update({
@@ -87,10 +94,16 @@ const AuthenticatedDashboardSettingsRoute =
     path: '/settings',
     getParentRoute: () => AuthenticatedDashboardRoute,
   } as any)
+const ApiPublicOrangePredictRoute = ApiPublicOrangePredictRouteImport.update({
+  id: '/api/public/orange-predict',
+  path: '/api/public/orange-predict',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/orange-disease-detection': typeof OrangeDiseaseDetectionRoute
   '/plant-growth-risk': typeof PlantGrowthRiskRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
@@ -99,11 +112,13 @@ export interface FileRoutesByFullPath {
   '/dashboard/history': typeof AuthenticatedDashboardHistoryRoute
   '/dashboard/models': typeof AuthenticatedDashboardModelsRoute
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/api/public/orange-predict': typeof ApiPublicOrangePredictRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/orange-disease-detection': typeof OrangeDiseaseDetectionRoute
   '/plant-growth-risk': typeof PlantGrowthRiskRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/dashboard/analytics': typeof AuthenticatedDashboardAnalyticsRoute
@@ -111,6 +126,7 @@ export interface FileRoutesByTo {
   '/dashboard/history': typeof AuthenticatedDashboardHistoryRoute
   '/dashboard/models': typeof AuthenticatedDashboardModelsRoute
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/api/public/orange-predict': typeof ApiPublicOrangePredictRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
 }
 export interface FileRoutesById {
@@ -118,6 +134,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/orange-disease-detection': typeof OrangeDiseaseDetectionRoute
   '/plant-growth-risk': typeof PlantGrowthRiskRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
@@ -126,6 +143,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/history': typeof AuthenticatedDashboardHistoryRoute
   '/_authenticated/dashboard/models': typeof AuthenticatedDashboardModelsRoute
   '/_authenticated/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/api/public/orange-predict': typeof ApiPublicOrangePredictRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
 }
 export interface FileRouteTypes {
@@ -133,6 +151,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/orange-disease-detection'
     | '/plant-growth-risk'
     | '/sitemap.xml'
     | '/dashboard'
@@ -141,11 +160,13 @@ export interface FileRouteTypes {
     | '/dashboard/history'
     | '/dashboard/models'
     | '/dashboard/settings'
+    | '/api/public/orange-predict'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
+    | '/orange-disease-detection'
     | '/plant-growth-risk'
     | '/sitemap.xml'
     | '/dashboard/analytics'
@@ -153,12 +174,14 @@ export interface FileRouteTypes {
     | '/dashboard/history'
     | '/dashboard/models'
     | '/dashboard/settings'
+    | '/api/public/orange-predict'
     | '/dashboard'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/orange-disease-detection'
     | '/plant-growth-risk'
     | '/sitemap.xml'
     | '/_authenticated/dashboard'
@@ -167,6 +190,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/history'
     | '/_authenticated/dashboard/models'
     | '/_authenticated/dashboard/settings'
+    | '/api/public/orange-predict'
     | '/_authenticated/dashboard/'
   fileRoutesById: FileRoutesById
 }
@@ -174,8 +198,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  OrangeDiseaseDetectionRoute: typeof OrangeDiseaseDetectionRoute
   PlantGrowthRiskRoute: typeof PlantGrowthRiskRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiPublicOrangePredictRoute: typeof ApiPublicOrangePredictRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -199,6 +225,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/orange-disease-detection': {
+      id: '/orange-disease-detection'
+      path: '/orange-disease-detection'
+      fullPath: '/orange-disease-detection'
+      preLoaderRoute: typeof OrangeDiseaseDetectionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/plant-growth-risk': {
@@ -264,6 +297,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardSettingsRouteImport
       parentRoute: typeof AuthenticatedDashboardRoute
     }
+    '/api/public/orange-predict': {
+      id: '/api/public/orange-predict'
+      path: '/api/public/orange-predict'
+      fullPath: '/api/public/orange-predict'
+      preLoaderRoute: typeof ApiPublicOrangePredictRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -306,8 +346,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  OrangeDiseaseDetectionRoute: OrangeDiseaseDetectionRoute,
   PlantGrowthRiskRoute: PlantGrowthRiskRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiPublicOrangePredictRoute: ApiPublicOrangePredictRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
