@@ -118,7 +118,7 @@ function OrangePage() {
                   <Button size="sm" variant="outline" onClick={() => void analyze()}><RotateCcw /> Retry</Button>
                 </div>
               )}
-              <Button size="lg" className="mt-auto w-full bg-gradient-primary pt-0" disabled={!file} onClick={() => void analyze()}><Citrus /> Analyze Orange</Button>
+              <Button size="lg" className="mt-6 w-full bg-gradient-primary" disabled={!file} onClick={() => void analyze()}><Citrus /> Analyze Orange</Button>
             </div>
           </div>
         )}
