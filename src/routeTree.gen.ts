@@ -21,6 +21,7 @@ import { Route as AuthenticatedDashboardDetectRouteImport } from './routes/_auth
 import { Route as AuthenticatedDashboardHistoryRouteImport } from './routes/_authenticated/dashboard.history'
 import { Route as AuthenticatedDashboardModelsRouteImport } from './routes/_authenticated/dashboard.models'
 import { Route as AuthenticatedDashboardSettingsRouteImport } from './routes/_authenticated/dashboard.settings'
+import { Route as ApiPublicOrangePredictRouteImport } from './routes/api/public/orange-predict'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -87,6 +88,11 @@ const AuthenticatedDashboardSettingsRoute =
     path: '/settings',
     getParentRoute: () => AuthenticatedDashboardRoute,
   } as any)
+const ApiPublicOrangePredictRoute = ApiPublicOrangePredictRouteImport.update({
+  id: '/api/public/orange-predict',
+  path: '/api/public/orange-predict',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -99,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/history': typeof AuthenticatedDashboardHistoryRoute
   '/dashboard/models': typeof AuthenticatedDashboardModelsRoute
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/api/public/orange-predict': typeof ApiPublicOrangePredictRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
 }
 export interface FileRoutesByTo {
@@ -111,6 +118,7 @@ export interface FileRoutesByTo {
   '/dashboard/history': typeof AuthenticatedDashboardHistoryRoute
   '/dashboard/models': typeof AuthenticatedDashboardModelsRoute
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/api/public/orange-predict': typeof ApiPublicOrangePredictRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
 }
 export interface FileRoutesById {
@@ -126,6 +134,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/history': typeof AuthenticatedDashboardHistoryRoute
   '/_authenticated/dashboard/models': typeof AuthenticatedDashboardModelsRoute
   '/_authenticated/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/api/public/orange-predict': typeof ApiPublicOrangePredictRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
 }
 export interface FileRouteTypes {
@@ -141,6 +150,7 @@ export interface FileRouteTypes {
     | '/dashboard/history'
     | '/dashboard/models'
     | '/dashboard/settings'
+    | '/api/public/orange-predict'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -153,6 +163,7 @@ export interface FileRouteTypes {
     | '/dashboard/history'
     | '/dashboard/models'
     | '/dashboard/settings'
+    | '/api/public/orange-predict'
     | '/dashboard'
   id:
     | '__root__'
@@ -167,6 +178,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/history'
     | '/_authenticated/dashboard/models'
     | '/_authenticated/dashboard/settings'
+    | '/api/public/orange-predict'
     | '/_authenticated/dashboard/'
   fileRoutesById: FileRoutesById
 }
@@ -176,6 +188,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   PlantGrowthRiskRoute: typeof PlantGrowthRiskRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiPublicOrangePredictRoute: typeof ApiPublicOrangePredictRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -264,6 +277,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardSettingsRouteImport
       parentRoute: typeof AuthenticatedDashboardRoute
     }
+    '/api/public/orange-predict': {
+      id: '/api/public/orange-predict'
+      path: '/api/public/orange-predict'
+      fullPath: '/api/public/orange-predict'
+      preLoaderRoute: typeof ApiPublicOrangePredictRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -308,6 +328,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   PlantGrowthRiskRoute: PlantGrowthRiskRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiPublicOrangePredictRoute: ApiPublicOrangePredictRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
