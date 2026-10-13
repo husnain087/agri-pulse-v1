@@ -8,11 +8,11 @@ export interface OrangeResult {
   disease: string;
   confidence: number; // percent, as returned
   predictions: { label: string; pct: number }[]; // descending
-  note?: string;
+  note?: string | undefined;
 }
 
 export function parseOrange(d: unknown): OrangeResult {
-  const o = d as Record<string, unknown> | null;
+  const o = d as { filename?: unknown; predicted_disease?: unknown; confidence?: unknown; predictions?: unknown; note?: unknown } | null;
   if (!o || typeof o.predicted_disease !== "string" || typeof o.confidence !== "number") throw new Error("The model returned an unexpected response.");
   const preds = o.predictions && typeof o.predictions === "object" ? (o.predictions as Record<string, unknown>) : {};
   return {
