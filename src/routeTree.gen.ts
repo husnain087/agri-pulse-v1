@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as FertilizerRecommendationRouteImport } from './routes/fertilizer-recommendation'
 import { Route as OrangeDiseaseDetectionRouteImport } from './routes/orange-disease-detection'
 import { Route as PlantGrowthRiskRouteImport } from './routes/plant-growth-risk'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -39,6 +40,12 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FertilizerRecommendationRoute =
+  FertilizerRecommendationRouteImport.update({
+    id: '/fertilizer-recommendation',
+    path: '/fertilizer-recommendation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const OrangeDiseaseDetectionRoute = OrangeDiseaseDetectionRouteImport.update({
   id: '/orange-disease-detection',
   path: '/orange-disease-detection',
@@ -110,6 +117,7 @@ const ApiPublicOrangePredictRoute = ApiPublicOrangePredictRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/fertilizer-recommendation': typeof FertilizerRecommendationRoute
   '/orange-disease-detection': typeof OrangeDiseaseDetectionRoute
   '/plant-growth-risk': typeof PlantGrowthRiskRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -126,6 +134,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/fertilizer-recommendation': typeof FertilizerRecommendationRoute
   '/orange-disease-detection': typeof OrangeDiseaseDetectionRoute
   '/plant-growth-risk': typeof PlantGrowthRiskRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -143,6 +152,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/fertilizer-recommendation': typeof FertilizerRecommendationRoute
   '/orange-disease-detection': typeof OrangeDiseaseDetectionRoute
   '/plant-growth-risk': typeof PlantGrowthRiskRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -161,6 +171,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/fertilizer-recommendation'
     | '/orange-disease-detection'
     | '/plant-growth-risk'
     | '/sitemap.xml'
@@ -177,6 +188,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/fertilizer-recommendation'
     | '/orange-disease-detection'
     | '/plant-growth-risk'
     | '/sitemap.xml'
@@ -193,6 +205,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/fertilizer-recommendation'
     | '/orange-disease-detection'
     | '/plant-growth-risk'
     | '/sitemap.xml'
@@ -211,6 +224,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  FertilizerRecommendationRoute: typeof FertilizerRecommendationRoute
   OrangeDiseaseDetectionRoute: typeof OrangeDiseaseDetectionRoute
   PlantGrowthRiskRoute: typeof PlantGrowthRiskRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -239,6 +253,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fertilizer-recommendation': {
+      id: '/fertilizer-recommendation'
+      path: '/fertilizer-recommendation'
+      fullPath: '/fertilizer-recommendation'
+      preLoaderRoute: typeof FertilizerRecommendationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/orange-disease-detection': {
@@ -367,6 +388,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  FertilizerRecommendationRoute: FertilizerRecommendationRoute,
   OrangeDiseaseDetectionRoute: OrangeDiseaseDetectionRoute,
   PlantGrowthRiskRoute: PlantGrowthRiskRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

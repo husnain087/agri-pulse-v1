@@ -1,4 +1,4 @@
-import { Citrus } from "lucide-react";
+import { Citrus, FlaskConical } from "lucide-react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Sprout, ArrowRight, ScanSearch, Bug, GitBranch, Flame, History, Activity, Upload, Cpu, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -96,6 +96,13 @@ function Home() {
             <h3 className="relative mt-2 flex items-center gap-2 text-2xl font-semibold"><Citrus className="h-6 w-6 text-primary" /> Orange Disease Detection</h3>
             <p className="relative mt-2 max-w-sm text-sm text-muted-foreground">AI-based citrus disease classification with confidence scores for every class.</p>
             <div className="relative mt-auto pt-6"><Button asChild className="bg-gradient-primary glow"><Link to="/orange-disease-detection"><Citrus /> Open Detection Module</Link></Button></div>
+          </div>
+          <div className="theme-night relative flex flex-col overflow-hidden rounded-2xl p-6 transition-transform duration-300 hover:-translate-y-1 md:col-span-2">
+            <div className="pointer-events-none absolute -right-10 -top-10 h-56 w-56 opacity-60" aria-hidden><NeuralBrainAnimation intensity={0.4} /></div>
+            <p className="relative font-mono text-xs uppercase tracking-widest text-primary">Option 4 · Fertilizer Model</p>
+            <h3 className="relative mt-2 flex items-center gap-2 text-2xl font-semibold"><FlaskConical className="h-6 w-6 text-primary" /> AI Fertilizer Recommendation</h3>
+            <p className="relative mt-2 max-w-sm text-sm text-muted-foreground">Get the right fertilizer from your soil, crop and N-P-K values with a trained ML model.</p>
+            <div className="relative mt-auto pt-6"><Button asChild className="bg-gradient-primary glow transition-all duration-300 hover:scale-[1.03]"><Link to="/fertilizer-recommendation"><FlaskConical /> AI Fertilizer Recommendation</Link></Button></div>
           </div>
         </div>
       </section>
