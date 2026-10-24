@@ -22,6 +22,7 @@ import { Route as AuthenticatedDashboardDetectRouteImport } from './routes/_auth
 import { Route as AuthenticatedDashboardHistoryRouteImport } from './routes/_authenticated/dashboard.history'
 import { Route as AuthenticatedDashboardModelsRouteImport } from './routes/_authenticated/dashboard.models'
 import { Route as AuthenticatedDashboardSettingsRouteImport } from './routes/_authenticated/dashboard.settings'
+import { Route as ApiPublicFertilizerPredictRouteImport } from './routes/api/public/fertilizer-predict'
 import { Route as ApiPublicOrangePredictRouteImport } from './routes/api/public/orange-predict'
 
 const IndexRoute = IndexRouteImport.update({
@@ -94,6 +95,12 @@ const AuthenticatedDashboardSettingsRoute =
     path: '/settings',
     getParentRoute: () => AuthenticatedDashboardRoute,
   } as any)
+const ApiPublicFertilizerPredictRoute =
+  ApiPublicFertilizerPredictRouteImport.update({
+    id: '/api/public/fertilizer-predict',
+    path: '/api/public/fertilizer-predict',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicOrangePredictRoute = ApiPublicOrangePredictRouteImport.update({
   id: '/api/public/orange-predict',
   path: '/api/public/orange-predict',
@@ -112,6 +119,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/history': typeof AuthenticatedDashboardHistoryRoute
   '/dashboard/models': typeof AuthenticatedDashboardModelsRoute
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/api/public/fertilizer-predict': typeof ApiPublicFertilizerPredictRoute
   '/api/public/orange-predict': typeof ApiPublicOrangePredictRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
 }
@@ -126,6 +134,7 @@ export interface FileRoutesByTo {
   '/dashboard/history': typeof AuthenticatedDashboardHistoryRoute
   '/dashboard/models': typeof AuthenticatedDashboardModelsRoute
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/api/public/fertilizer-predict': typeof ApiPublicFertilizerPredictRoute
   '/api/public/orange-predict': typeof ApiPublicOrangePredictRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
 }
@@ -143,6 +152,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/history': typeof AuthenticatedDashboardHistoryRoute
   '/_authenticated/dashboard/models': typeof AuthenticatedDashboardModelsRoute
   '/_authenticated/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/api/public/fertilizer-predict': typeof ApiPublicFertilizerPredictRoute
   '/api/public/orange-predict': typeof ApiPublicOrangePredictRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
 }
@@ -160,6 +170,7 @@ export interface FileRouteTypes {
     | '/dashboard/history'
     | '/dashboard/models'
     | '/dashboard/settings'
+    | '/api/public/fertilizer-predict'
     | '/api/public/orange-predict'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
@@ -174,6 +185,7 @@ export interface FileRouteTypes {
     | '/dashboard/history'
     | '/dashboard/models'
     | '/dashboard/settings'
+    | '/api/public/fertilizer-predict'
     | '/api/public/orange-predict'
     | '/dashboard'
   id:
@@ -190,6 +202,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/history'
     | '/_authenticated/dashboard/models'
     | '/_authenticated/dashboard/settings'
+    | '/api/public/fertilizer-predict'
     | '/api/public/orange-predict'
     | '/_authenticated/dashboard/'
   fileRoutesById: FileRoutesById
@@ -201,6 +214,7 @@ export interface RootRouteChildren {
   OrangeDiseaseDetectionRoute: typeof OrangeDiseaseDetectionRoute
   PlantGrowthRiskRoute: typeof PlantGrowthRiskRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiPublicFertilizerPredictRoute: typeof ApiPublicFertilizerPredictRoute
   ApiPublicOrangePredictRoute: typeof ApiPublicOrangePredictRoute
 }
 
@@ -297,6 +311,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardSettingsRouteImport
       parentRoute: typeof AuthenticatedDashboardRoute
     }
+    '/api/public/fertilizer-predict': {
+      id: '/api/public/fertilizer-predict'
+      path: '/api/public/fertilizer-predict'
+      fullPath: '/api/public/fertilizer-predict'
+      preLoaderRoute: typeof ApiPublicFertilizerPredictRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/orange-predict': {
       id: '/api/public/orange-predict'
       path: '/api/public/orange-predict'
@@ -349,6 +370,7 @@ const rootRouteChildren: RootRouteChildren = {
   OrangeDiseaseDetectionRoute: OrangeDiseaseDetectionRoute,
   PlantGrowthRiskRoute: PlantGrowthRiskRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiPublicFertilizerPredictRoute: ApiPublicFertilizerPredictRoute,
   ApiPublicOrangePredictRoute: ApiPublicOrangePredictRoute,
 }
 export const routeTree = rootRouteImport

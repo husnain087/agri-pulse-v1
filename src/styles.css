@@ -170,3 +170,5 @@
 @keyframes orange-bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .orange-bar { transform-origin: left; animation: orange-bar 0.9s cubic-bezier(.2,.8,.2,1) both; }
 @media (prefers-reduced-motion: reduce) { .orange-scan, .orange-neuron, .orange-bar { animation: none; } }
+
+@keyframes fert-sweep { 0% { transform: translateX(-100%); } 100% { transform: translateX(300%); } }
