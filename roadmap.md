@@ -4,5 +4,6 @@
 - [x] Hide growth model notes.
 - [x] Add Google/email login and private saved detection/growth results.
 - [x] Verify public page flows, login UI, dashboard redirects, and automated tests.
+- [x] Add AI Fertilizer Recommendation page with real model; verified.
 - [ ] Verify authenticated end-to-end persistence after the first user signs up; no auth users exist yet.
 - [x] Fix reported missing sitemap and verify public-page inclusions and private-page exclusions; live change awaits publishing.
