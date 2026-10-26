@@ -56,7 +56,7 @@ export function toFertInput(raw: Record<string, string>): { ok: true; body: Fert
 export async function predictFertilizer(body: FertInput, signal?: AbortSignal): Promise<FertPrediction> {
   let r: Response;
   try {
-    r = await fetch("/api/public/fertilizer-predict", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), signal });
+    r = await fetch("/api/public/fertilizer-predict", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), signal: signal ?? null });
   } catch {
     throw new Error("Could not reach the fertilizer model. Please check your connection and retry.");
   }
