@@ -6,6 +6,7 @@ import { BrandMark } from "@/components/agrisense/BrandMark";
 import { NeuralBrainAnimation } from "@/components/agrisense/NeuralBrainAnimation";
 import { AccountButton } from "@/components/agrisense/AccountButton";
 import hero from "@/assets/hero-field.jpg";
+import { ProjectInfoDialogs } from "@/components/agrisense/ProjectInfoDialogs";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
@@ -110,6 +111,7 @@ function Home() {
       <section id="features" className="mx-auto max-w-6xl scroll-mt-10 px-5 py-24">
         <h2 className="text-3xl font-bold md:text-4xl">Everything you need to read a leaf</h2>
         <p className="mt-3 max-w-2xl text-muted-foreground">Three deployed deep-learning models working as one pipeline — no manual crop selection, no fake results.</p>
+        <ProjectInfoDialogs />
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map(({ icon: Icon, t, d }) => (
             <div key={t} className="surface rounded-2xl p-6 transition-transform hover:-translate-y-1">
