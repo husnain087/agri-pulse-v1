@@ -2,6 +2,7 @@ import { Download, ExternalLink, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import report from "@/assets/project-report.pdf.asset.json";
+import cover from "@/assets/project-report-cover.jpg.asset.json";
 
 export function ProjectReportDialog() {
   return (
@@ -22,7 +23,9 @@ export function ProjectReportDialog() {
             <a href={report.url} target="_blank" rel="noopener noreferrer"><ExternalLink /> Open PDF<span className="sr-only"> in a new tab</span></a>
           </Button>
         </div>
-        <iframe src={report.url} title="Agri Pulse detailed project report" className="min-h-0 w-full flex-1 rounded border bg-muted" />
+        <a href={report.url} target="_blank" rel="noopener noreferrer" aria-label="Open full project report PDF" className="min-h-0 flex-1 overflow-auto rounded border bg-muted">
+          <img src={cover.url} alt="First page of the Agri Pulse detailed project report" className="mx-auto h-full w-full object-contain" />
+        </a>
       </DialogContent>
     </Dialog>
   );
