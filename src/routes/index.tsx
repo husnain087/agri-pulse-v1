@@ -7,6 +7,7 @@ import { NeuralBrainAnimation } from "@/components/agrisense/NeuralBrainAnimatio
 import { AccountButton } from "@/components/agrisense/AccountButton";
 import hero from "@/assets/hero-field.jpg";
 import { ProjectInfoDialogs } from "@/components/agrisense/ProjectInfoDialogs";
+import { ProjectReportDialog } from "@/components/agrisense/ProjectReportDialog";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
@@ -58,6 +59,7 @@ function Home() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg" className="bg-gradient-primary glow"><Link to="/dashboard/detect">Analyze My Crop <ArrowRight /></Link></Button>
               <Button asChild size="lg" variant="outline"><Link to="/dashboard">Explore Dashboard</Link></Button>
+              <ProjectReportDialog />
             </div>
           </div>
           <div className="glass rounded-3xl p-5">
