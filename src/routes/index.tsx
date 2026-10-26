@@ -82,7 +82,7 @@ function Home() {
             <h3 className="relative mt-2 flex items-center gap-2 text-2xl font-semibold"><ScanSearch className="h-6 w-6 shrink-0 text-primary" /> Existing AI Models</h3>
             <p className="mt-2 text-sm text-muted-foreground">Crop Identifier → Maize or Wheat Disease AI with Grad-CAM heatmaps.</p>
             <div className="mt-auto flex flex-wrap gap-3 pt-6">
-              <Button asChild className="bg-gradient-primary glow"><Link to="/dashboard/detect">Analyze My Crop <ArrowRight /></Link></Button>
+              <Button asChild className="bg-gradient-primary glow"><Link to="/dashboard/detect">Maize &amp; Wheat Analyze <ArrowRight /></Link></Button>
               <Button asChild variant="outline"><Link to="/dashboard/models">View models</Link></Button>
             </div>
           </div>
