@@ -7,3 +7,4 @@
 - [x] Add AI Fertilizer Recommendation page with real model; verified.
 - [ ] Verify authenticated end-to-end persistence after the first user signs up; no auth users exist yet.
 - [x] Fix reported missing sitemap and verify public-page inclusions and private-page exclusions; live change awaits publishing.
+- [x] Add "Video Presentation" button on the home page that opens and plays the uploaded presentation video; verified dialog, player wiring, and download link.
