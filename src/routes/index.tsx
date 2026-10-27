@@ -8,6 +8,7 @@ import { AccountButton } from "@/components/agrisense/AccountButton";
 import hero from "@/assets/hero-field.jpg";
 import { ProjectInfoDialogs } from "@/components/agrisense/ProjectInfoDialogs";
 import { ProjectReportDialog } from "@/components/agrisense/ProjectReportDialog";
+import { VideoPresentationDialog } from "@/components/agrisense/VideoPresentationDialog";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
