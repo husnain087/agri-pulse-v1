@@ -8,6 +8,7 @@ import { AccountButton } from "@/components/agrisense/AccountButton";
 import hero from "@/assets/hero-field.jpg";
 import { ProjectInfoDialogs } from "@/components/agrisense/ProjectInfoDialogs";
 import { ProjectReportDialog } from "@/components/agrisense/ProjectReportDialog";
+import { VideoPresentationDialog } from "@/components/agrisense/VideoPresentationDialog";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
@@ -60,6 +61,7 @@ function Home() {
               <Button asChild size="lg" className="bg-gradient-primary glow"><Link to="/dashboard/detect">Analyze My Crop <ArrowRight /></Link></Button>
               <Button asChild size="lg" variant="outline"><Link to="/dashboard">Explore Dashboard</Link></Button>
               <ProjectReportDialog />
+              <VideoPresentationDialog />
             </div>
           </div>
           <div className="glass rounded-3xl p-5">
