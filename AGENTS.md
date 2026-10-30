@@ -16,3 +16,5 @@
 - Sitemap URLs derive from required route staticData decisions; exclude private subtrees and omit lastmod without page-specific content timestamps to prevent private or misleading search entries.
 - Growth processing visuals follow the real request stages without adding artificial model delays; shared neural visuals use canvas and semantic palette tokens for lightweight animation.
 - Fixed project reports use Lovable Assets pointers and a shared report dialog with same-origin PDF viewing and download links, keeping binary documents out of source control.
+- The farming assistant uses AI Elements and in-memory AI SDK messages mounted at the root, remounting on identity changes to prevent conversation leakage; no chat persistence.
+- Gemini chat uses a same-origin streaming server route and the user's gateway-backed Gemini connector; reject foreign origins, validate text-only history, keep credentials server-side and never substitute another provider.

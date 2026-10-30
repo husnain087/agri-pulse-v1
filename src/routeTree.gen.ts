@@ -17,6 +17,7 @@ import { Route as OrangeDiseaseDetectionRouteImport } from './routes/orange-dise
 import { Route as PlantGrowthRiskRouteImport } from './routes/plant-growth-risk'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as ApiFarmingChatRouteImport } from './routes/api/farming-chat'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
 import { Route as AuthenticatedDashboardAnalyticsRouteImport } from './routes/_authenticated/dashboard.analytics'
 import { Route as AuthenticatedDashboardDetectRouteImport } from './routes/_authenticated/dashboard.detect'
@@ -65,6 +66,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const ApiFarmingChatRoute = ApiFarmingChatRouteImport.update({
+  id: '/api/farming-chat',
+  path: '/api/farming-chat',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedDashboardIndexRoute =
   AuthenticatedDashboardIndexRouteImport.update({
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/plant-growth-risk': typeof PlantGrowthRiskRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
+  '/api/farming-chat': typeof ApiFarmingChatRoute
   '/dashboard/analytics': typeof AuthenticatedDashboardAnalyticsRoute
   '/dashboard/detect': typeof AuthenticatedDashboardDetectRoute
   '/dashboard/history': typeof AuthenticatedDashboardHistoryRoute
@@ -138,6 +145,7 @@ export interface FileRoutesByTo {
   '/orange-disease-detection': typeof OrangeDiseaseDetectionRoute
   '/plant-growth-risk': typeof PlantGrowthRiskRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/farming-chat': typeof ApiFarmingChatRoute
   '/dashboard/analytics': typeof AuthenticatedDashboardAnalyticsRoute
   '/dashboard/detect': typeof AuthenticatedDashboardDetectRoute
   '/dashboard/history': typeof AuthenticatedDashboardHistoryRoute
@@ -157,6 +165,7 @@ export interface FileRoutesById {
   '/plant-growth-risk': typeof PlantGrowthRiskRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
+  '/api/farming-chat': typeof ApiFarmingChatRoute
   '/_authenticated/dashboard/analytics': typeof AuthenticatedDashboardAnalyticsRoute
   '/_authenticated/dashboard/detect': typeof AuthenticatedDashboardDetectRoute
   '/_authenticated/dashboard/history': typeof AuthenticatedDashboardHistoryRoute
@@ -176,6 +185,7 @@ export interface FileRouteTypes {
     | '/plant-growth-risk'
     | '/sitemap.xml'
     | '/dashboard'
+    | '/api/farming-chat'
     | '/dashboard/analytics'
     | '/dashboard/detect'
     | '/dashboard/history'
@@ -192,6 +202,7 @@ export interface FileRouteTypes {
     | '/orange-disease-detection'
     | '/plant-growth-risk'
     | '/sitemap.xml'
+    | '/api/farming-chat'
     | '/dashboard/analytics'
     | '/dashboard/detect'
     | '/dashboard/history'
@@ -210,6 +221,7 @@ export interface FileRouteTypes {
     | '/plant-growth-risk'
     | '/sitemap.xml'
     | '/_authenticated/dashboard'
+    | '/api/farming-chat'
     | '/_authenticated/dashboard/analytics'
     | '/_authenticated/dashboard/detect'
     | '/_authenticated/dashboard/history'
@@ -228,6 +240,7 @@ export interface RootRouteChildren {
   OrangeDiseaseDetectionRoute: typeof OrangeDiseaseDetectionRoute
   PlantGrowthRiskRoute: typeof PlantGrowthRiskRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiFarmingChatRoute: typeof ApiFarmingChatRoute
   ApiPublicFertilizerPredictRoute: typeof ApiPublicFertilizerPredictRoute
   ApiPublicOrangePredictRoute: typeof ApiPublicOrangePredictRoute
 }
@@ -289,6 +302,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/api/farming-chat': {
+      id: '/api/farming-chat'
+      path: '/api/farming-chat'
+      fullPath: '/api/farming-chat'
+      preLoaderRoute: typeof ApiFarmingChatRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_authenticated/dashboard/': {
       id: '/_authenticated/dashboard/'
@@ -392,6 +412,7 @@ const rootRouteChildren: RootRouteChildren = {
   OrangeDiseaseDetectionRoute: OrangeDiseaseDetectionRoute,
   PlantGrowthRiskRoute: PlantGrowthRiskRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiFarmingChatRoute: ApiFarmingChatRoute,
   ApiPublicFertilizerPredictRoute: ApiPublicFertilizerPredictRoute,
   ApiPublicOrangePredictRoute: ApiPublicOrangePredictRoute,
 }
