@@ -14,6 +14,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { AuthContext } from "@/lib/auth-context";
 import { setHistoryOwner } from "@/lib/history-store";
 import { cancelDetection } from "@/lib/detection-store";
+import { FarmingAssistant } from "@/components/agrisense/FarmingAssistant";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -154,7 +155,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthContext.Provider value={auth}><Outlet /></AuthContext.Provider>
+      <AuthContext.Provider value={auth}><Outlet /><FarmingAssistant key={auth.user?.id ?? "public"} /></AuthContext.Provider>
     </QueryClientProvider>
   );
 }
