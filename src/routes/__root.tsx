@@ -15,6 +15,7 @@ import { AuthContext } from "@/lib/auth-context";
 import { setHistoryOwner } from "@/lib/history-store";
 import { cancelDetection } from "@/lib/detection-store";
 import { FarmingAssistant } from "@/components/agrisense/FarmingAssistant";
+import { LanguageProvider } from "@/lib/site-language";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -96,6 +97,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" },
       {
         rel: "stylesheet",
         href: appCss,
@@ -155,7 +157,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthContext.Provider value={auth}><Outlet /><FarmingAssistant key={auth.user?.id ?? "public"} /></AuthContext.Provider>
+      <LanguageProvider><AuthContext.Provider value={auth}><Outlet /><FarmingAssistant key={auth.user?.id ?? "public"} /></AuthContext.Provider></LanguageProvider>
     </QueryClientProvider>
   );
 }

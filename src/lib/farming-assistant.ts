@@ -11,9 +11,16 @@ export const SUGGESTIONS = [
   "What should I do if my crop growth is slow?",
 ];
 
+export const chatLanguageSchema = z.enum(["auto", "en", "ur", "roman-ur"]);
+export type ChatLanguage = z.infer<typeof chatLanguageSchema>;
+export function replyLanguageInstructions(language: ChatLanguage) {
+  return language === "ur" ? "Always reply in Urdu using Urdu script, even when the farmer writes in English or Roman Urdu." : language === "en" ? "Always reply in English." : language === "roman-ur" ? "Always reply in Roman Urdu (Urdu written with Latin letters)." : "Reply in the farmer's language: English, Roman Urdu, or Urdu.";
+}
+
 // Accept text only: arbitrary system instructions, tool results and image URLs
 // from the client cannot enter the provider conversation.
 export const chatRequestSchema = z.object({
+  language: chatLanguageSchema.default("auto"),
   messages: z.array(z.object({
     id: z.string().min(1).max(200),
     role: z.enum(["user", "assistant"]),

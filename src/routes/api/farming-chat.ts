@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { chatRequestSchema, FARMING_INSTRUCTIONS } from "@/lib/farming-assistant";
+import { chatRequestSchema, FARMING_INSTRUCTIONS, replyLanguageInstructions } from "@/lib/farming-assistant";
 
 export const Route = createFileRoute("/api/farming-chat")({
   staticData: { sitemap: false },
@@ -39,7 +39,7 @@ export const Route = createFileRoute("/api/farming-chat")({
     });
     const result = streamText({
       model: google("gemini-3.5-flash-lite"),
-      system: FARMING_INSTRUCTIONS,
+      system: `${FARMING_INSTRUCTIONS}\nSelected reply language: ${replyLanguageInstructions(parsed.data.language)}`,
       messages: await convertToModelMessages(parsed.data.messages),
       abortSignal: request.signal,
       maxRetries: 0,
