@@ -1,4 +1,5 @@
 # Tasks
+- [ ] Add whole-site English/Urdu selection and independently selectable farming-chat reply language; verify switching and Urdu replies.
 - [ ] Add session-only Gemini farming assistant with floating chat, secure connection and safety guidance.
 - [ ] Verify real chat, context, errors and mobile display; requires the user's Gemini connection.
 - [x] Match Option 1 to Option 2 and enrich live growth-model neuron/data-flow animation; real prediction verified.

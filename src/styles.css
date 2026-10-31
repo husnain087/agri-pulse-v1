@@ -172,3 +172,16 @@
 @media (prefers-reduced-motion: reduce) { .orange-scan, .orange-neuron, .orange-bar { animation: none; } }
 
 @keyframes fert-sweep { 0% { transform: translateX(-100%); } 100% { transform: translateX(300%); } }
+
+html[lang="ur"] body, [dir="rtl"] {
+  --font-sans: "Noto Sans Arabic", "DM Sans", sans-serif;
+  --font-display: "Noto Sans Arabic", "Space Grotesk", sans-serif;
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+}
+html[lang="ur"] h1, html[lang="ur"] h2, html[lang="ur"] h3, html[lang="ur"] h4 { line-height: 1.65; letter-spacing: 0; }
+html[lang="ur"] .tracking-widest, html[lang="ur"] .tracking-\[0\.3em\] { letter-spacing: 0; }
+html[dir="rtl"] .text-left { text-align: start; }
+html[dir="rtl"] .text-right { text-align: end; }
+html[dir="rtl"] input[type="email"], html[dir="rtl"] input[type="number"], html[dir="rtl"] pre { direction: ltr; text-align: left; }
+html[dir="rtl"] header > div:first-child, html[dir="rtl"] header.mx-auto { flex-wrap: wrap; gap: 1rem; }
