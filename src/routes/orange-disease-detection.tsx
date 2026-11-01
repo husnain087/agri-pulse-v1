@@ -1,3 +1,4 @@
+import { LanguageSwitcher } from "@/components/agrisense/LanguageSwitcher";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, AlertTriangle, CheckCircle2, ChevronRight, Citrus, Download, ImagePlus, LayoutDashboard, RotateCcw, Upload, X, ShieldCheck } from "lucide-react";
@@ -69,9 +70,9 @@ function OrangePage() {
   return (
     <div className="min-h-screen">
       <header className="theme-night">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 flex-wrap px-5 py-5">
           <BrandMark />
-          <div className="flex items-center gap-2"><Button asChild variant="outline" size="sm"><Link to="/"><ArrowLeft /> Home</Link></Button><AccountButton /></div>
+          <div className="flex flex-wrap items-center gap-2"><Button asChild variant="outline" size="sm"><Link to="/"><ArrowLeft /> Home</Link></Button><LanguageSwitcher /><AccountButton /></div>
         </div>
         <div className="mx-auto max-w-6xl px-5 pb-14 pt-6">
           <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1 text-sm text-muted-foreground">

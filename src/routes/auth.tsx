@@ -1,3 +1,4 @@
+import { LanguageSwitcher } from "@/components/agrisense/LanguageSwitcher";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Leaf, Mail } from "lucide-react";
@@ -52,7 +53,7 @@ function AuthPage() {
   }
 
   return <div className="min-h-screen bg-background">
-    <header className="theme-night"><div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5"><BrandMark /><Button asChild variant="outline" size="sm"><Link to="/">Home</Link></Button></div></header>
+    <header className="theme-night"><div className="mx-auto flex max-w-6xl items-center justify-between gap-3 flex-wrap px-5 py-5"><BrandMark /><div className="flex items-center gap-2"><LanguageSwitcher /><Button asChild variant="outline" size="sm"><Link to="/">Home</Link></Button></div></div></header>
     <main className="mx-auto max-w-md px-5 py-14">
       <div className="surface rounded-2xl p-7">
         <span className="grid h-12 w-12 place-items-center rounded-xl bg-accent text-primary"><Leaf /></span>

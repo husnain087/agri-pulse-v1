@@ -1,3 +1,4 @@
+import { LanguageSwitcher } from "@/components/agrisense/LanguageSwitcher";
 import { Citrus, FlaskConical } from "lucide-react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Sprout, ArrowRight, ScanSearch, Bug, GitBranch, Flame, History, Activity, Upload, Cpu, BarChart3 } from "lucide-react";
@@ -43,14 +44,14 @@ function Home() {
         {Array.from({ length: 14 }, (_, i) => (
           <span key={i} aria-hidden className="absolute -z-10 h-1.5 w-1.5 rounded-full bg-primary/70 animate-float" style={{ left: `${(i * 37) % 100}%`, top: `${20 + ((i * 53) % 70)}%`, animationDelay: `${i * 0.4}s` }} />
         ))}
-        <header className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5">
+        <header className="mx-auto flex max-w-6xl items-center justify-between gap-3 flex-wrap px-5 py-5">
           <BrandMark />
           <nav className="hidden gap-7 text-sm text-muted-foreground md:flex">
             <a href="#features" className="hover:text-foreground">Features</a>
             <a href="#how" className="hover:text-foreground">How It Works</a>
             <Link to="/dashboard/models" className="hover:text-foreground">AI Models</Link>
           </nav>
-          <div className="flex items-center gap-2"><Button asChild size="sm" variant="outline"><Link to="/dashboard">Dashboard</Link></Button><AccountButton /></div>
+          <div className="flex flex-wrap items-center gap-2"><Button asChild size="sm" variant="outline"><Link to="/dashboard">Dashboard</Link></Button><LanguageSwitcher /><AccountButton /></div>
         </header>
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-24 pt-12 lg:grid-cols-[1.1fr_1fr] lg:pt-20">
           <div className="animate-fade-up">

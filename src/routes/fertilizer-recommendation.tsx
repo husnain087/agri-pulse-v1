@@ -1,3 +1,4 @@
+import { LanguageSwitcher } from "@/components/agrisense/LanguageSwitcher";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { AlertTriangle, ArrowLeft, Brain, FlaskConical, Home, Leaf, RotateCcw, Sparkles } from "lucide-react";
@@ -75,7 +76,7 @@ function FertilizerPage() {
       <header className="theme-night">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
           <BrandMark />
-          <div className="flex items-center gap-2"><Button asChild size="sm" variant="outline"><Link to="/"><ArrowLeft /> Home</Link></Button><AccountButton /></div>
+          <div className="flex flex-wrap items-center gap-2"><Button asChild size="sm" variant="outline"><Link to="/"><ArrowLeft /> Home</Link></Button><LanguageSwitcher /><AccountButton /></div>
         </div>
       </header>
 

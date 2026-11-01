@@ -1,3 +1,4 @@
+import { LanguageSwitcher } from "@/components/agrisense/LanguageSwitcher";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { useState } from "react";
 import { LayoutDashboard, ScanLine, History, BarChart3, Cpu, Settings, Menu, X } from "lucide-react";
@@ -64,7 +65,7 @@ function DashboardLayout() {
             <span className="lg:hidden"><BrandMark /></span>
             <p className="hidden text-sm text-muted-foreground lg:block">Crop intelligence workspace</p>
           </div>
-          <div className="flex items-center gap-2"><Button asChild size="sm"><Link to="/dashboard/detect"><ScanLine /> New Detection</Link></Button><AccountButton /></div>
+          <div className="flex flex-wrap items-center gap-2"><Button asChild size="sm"><Link to="/dashboard/detect"><ScanLine /> New Detection</Link></Button><LanguageSwitcher /><AccountButton /></div>
         </header>
         <main className={cn("mx-auto max-w-6xl px-5 py-8 md:px-8")}>
           <Outlet />
