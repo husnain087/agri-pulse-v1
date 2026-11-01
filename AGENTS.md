@@ -18,3 +18,4 @@
 - Fixed project reports use Lovable Assets pointers and a shared report dialog with same-origin PDF viewing and download links, keeping binary documents out of source control.
 - The farming assistant uses AI Elements and in-memory AI SDK messages mounted at the root, remounting on identity changes to prevent conversation leakage; no chat persistence.
 - Gemini chat uses a same-origin streaming server route and the user's gateway-backed Gemini connector; reject foreign origins, validate text-only history, keep credentials server-side and never substitute another provider.
+- Site localization uses a root language context and explicit dictionary lookups, never DOM mutation; translate display text only, preserving model payloads, option values, user inputs and model raw JSON. Chat sends a separately validated reply-language choice with each request.
