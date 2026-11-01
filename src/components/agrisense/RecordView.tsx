@@ -1,3 +1,4 @@
+import { useLanguage } from "@/lib/site-language";
 import { Info, Leaf, Download, Clock, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { prettyLabel } from "@/lib/agrisense-api";
@@ -8,53 +9,54 @@ export const fmtPct = (v?: number) => (v === undefined ? "—" : `${v.toFixed(2)
 export const fmtDate = (t: number) => new Date(t).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
 
 export function HeatmapViewer({ original, heatmap, method, note }: { original: string; heatmap?: string | undefined; method?: string | undefined; note?: string | undefined }) {
+ const { t } = useLanguage();
   return (
     <div>
       <div className="grid gap-4 sm:grid-cols-2">
         <figure>
-          <img src={original} alt="Original upload" className="aspect-square w-full rounded-xl bg-muted object-cover" />
-          <figcaption className="mt-2 text-center text-xs text-muted-foreground">Original image</figcaption>
+          <img src={original} alt={t("Original upload")} className="aspect-square w-full rounded-xl bg-muted object-cover" />
+          <figcaption className="mt-2 text-center text-xs text-muted-foreground">{t("Original image")}</figcaption>
         </figure>
         <figure>
-          {heatmap ? (
-            <img src={heatmap} alt="Model heatmap overlay" className="aspect-square w-full rounded-xl bg-muted object-cover" />
+          {t(heatmap ? (
+            <img src={heatmap} alt={t("Model heatmap overlay")} className="aspect-square w-full rounded-xl bg-muted object-cover" />
           ) : (
             <div className="grid aspect-square w-full place-items-center rounded-xl border border-dashed bg-muted/50 p-6 text-center text-sm text-muted-foreground">
-              Heatmap unavailable for this prediction — the model did not return one.
-            </div>
-          )}
-          <figcaption className="mt-2 text-center text-xs text-muted-foreground">{heatmap ? `${method ?? "Heatmap"} overlay` : "No heatmap returned"}</figcaption>
+              {t("Heatmap unavailable for this prediction — the model did not return one.")}</div>
+          ))}
+          <figcaption className="mt-2 text-center text-xs text-muted-foreground">{t(heatmap ? `${method ?? "Heatmap"} overlay` : "No heatmap returned")}</figcaption>
         </figure>
       </div>
       <p className="mt-4 flex gap-2 rounded-xl bg-muted/60 p-3 text-sm text-muted-foreground">
         <Info className="mt-0.5 h-4 w-4 shrink-0 text-cyan" />
         <span>
-          {note ? `${note.replace(/\.+$/, "")}. ` : ""}A heatmap highlights the image regions that most influenced the model's prediction (warmer = stronger influence). It is an explanation aid, not a definitive diagnosis by itself.
-        </span>
+          {t(note ? `${note.replace(/\.+$/, "")}. ` : "")}{t("A heatmap highlights the image regions that most influenced the model's prediction (warmer = stronger influence). It is an explanation aid, not a definitive diagnosis by itself.")}</span>
       </p>
     </div>
   );
 }
 
 export function ProbabilityBars({ probs }: { probs: Record<string, number> }) {
+ const { t } = useLanguage();
   const rows = Object.entries(probs).sort((a, b) => b[1] - a[1]);
   return (
     <ul className="space-y-3">
-      {rows.map(([k, v], i) => (
+      {t(rows.map(([k, v], i) => (
         <li key={k}>
-          <div className="mb-1 flex justify-between text-sm"><span>{prettyLabel(k)}</span><span className="font-mono">{v.toFixed(2)}%</span></div>
+          <div className="mb-1 flex justify-between text-sm"><span>{t(prettyLabel(k))}</span><span className="font-mono">{t(v.toFixed(2))}{t("%")}</span></div>
           <div className="h-2 rounded-full bg-muted"><div className={i === 0 ? "h-2 rounded-full bg-gradient-primary" : "h-2 rounded-full bg-cyan/40"} style={{ width: `${Math.max(1, v)}%` }} /></div>
         </li>
-      ))}
+      )))}
     </ul>
   );
 }
 
 function Stat({ label, value, icon }: { label: string; value: string; icon?: ReactNode }) {
+ const { t } = useLanguage();
   return (
     <div className="rounded-xl bg-muted/60 p-4">
-      <p className="text-xs text-muted-foreground">{label}</p>
-      <p className="mt-1 flex items-center gap-2 font-semibold">{icon}{value}</p>
+      <p className="text-xs text-muted-foreground">{t(label)}</p>
+      <p className="mt-1 flex items-center gap-2 font-semibold">{t(icon)}{t(value)}</p>
     </div>
   );
 }
@@ -91,38 +93,39 @@ export async function downloadReport(r: PredictionRecord, original: string) {
 }
 
 export function RecordView({ record: r, original, actions }: { record: PredictionRecord; original?: string | null | undefined; actions?: ReactNode }) {
+ const { t } = useLanguage();
   const img = original ?? r.image;
   return (
     <div className="space-y-6 animate-fade-up">
       <div className="surface rounded-2xl p-6 md:p-8">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground"><CheckCircle2 className="h-4 w-4 text-success" /> Completed · {r.model}</p>
-            <h2 className={`mt-2 text-4xl font-bold md:text-5xl ${isHealthy(r) ? "text-success" : "text-gold"}`}>{prettyLabel(r.disease)}</h2>
-            <p className="mt-2 flex items-center gap-2 text-sm text-muted-foreground"><Clock className="h-4 w-4" />{fmtDate(r.createdAt)}</p>
+            <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground"><CheckCircle2 className="h-4 w-4 text-success" /> {t("Completed · ")}{t(r.model)}</p>
+            <h2 className={`mt-2 text-4xl font-bold md:text-5xl ${isHealthy(r) ? "text-success" : "text-gold"}`}>{t(prettyLabel(r.disease))}</h2>
+            <p className="mt-2 flex items-center gap-2 text-sm text-muted-foreground"><Clock className="h-4 w-4" />{t(fmtDate(r.createdAt))}</p>
           </div>
           <div className="text-right">
-            <p className="text-xs text-muted-foreground">Model confidence</p>
-            <p className="font-display text-4xl font-bold">{fmtPct(r.confidence)}</p>
+            <p className="text-xs text-muted-foreground">{t("Model confidence")}</p>
+            <p className="font-display text-4xl font-bold">{t(fmtPct(r.confidence))}</p>
           </div>
         </div>
         <div className="mt-6 grid gap-3 sm:grid-cols-3">
-          <Stat label="Identified crop" value={r.crop} icon={<Leaf className="h-4 w-4 text-primary" />} />
-          <Stat label="Crop confidence" value={fmtPct(r.cropConfidence)} />
-          <Stat label="Disease model" value={r.model} />
+          <Stat label={t("Identified crop")} value={r.crop} icon={<Leaf className="h-4 w-4 text-primary" />} />
+          <Stat label={t("Crop confidence")} value={fmtPct(r.cropConfidence)} />
+          <Stat label={t("Disease model")} value={r.model} />
         </div>
       </div>
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
-        <div className="surface rounded-2xl p-6"><h3 className="mb-4 font-semibold">Visual explanation</h3><HeatmapViewer original={img} heatmap={r.heatmap} method={r.heatmapMethod} note={r.heatmapNote} /></div>
+        <div className="surface rounded-2xl p-6"><h3 className="mb-4 font-semibold">{t("Visual explanation")}</h3><HeatmapViewer original={img} heatmap={r.heatmap} method={r.heatmapMethod} note={r.heatmapNote} /></div>
         <div className="surface rounded-2xl p-6">
-          <h3 className="mb-4 font-semibold">Disease probabilities</h3>
-          {r.probabilities ? <ProbabilityBars probs={r.probabilities} /> : <p className="text-sm text-muted-foreground">The model did not return class probabilities.</p>}
-          {r.cropProbabilities && (<><h3 className="mb-4 mt-8 font-semibold">Crop identification</h3><ProbabilityBars probs={r.cropProbabilities} /></>)}
+          <h3 className="mb-4 font-semibold">{t("Disease probabilities")}</h3>
+          {t(r.probabilities ? <ProbabilityBars probs={r.probabilities} /> : <p className="text-sm text-muted-foreground">{t("The model did not return class probabilities.")}</p>)}
+          {t(r.cropProbabilities && (<><h3 className="mb-4 mt-8 font-semibold">{t("Crop identification")}</h3><ProbabilityBars probs={r.cropProbabilities} /></>))}
         </div>
       </div>
       <div className="flex flex-wrap justify-center gap-3">
-        {actions}
-        <Button size="lg" variant="outline" onClick={() => void downloadReport(r, img)}><Download /> Download report</Button>
+        {t(actions)}
+        <Button size="lg" variant="outline" onClick={() => void downloadReport(r, img)}><Download /> {t("Download report")}</Button>
       </div>
     </div>
   );

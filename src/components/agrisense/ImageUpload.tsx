@@ -1,3 +1,4 @@
+import { useLanguage } from "@/lib/site-language";
 import { useRef, useState } from "react";
 import { ImagePlus } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -5,6 +6,7 @@ import { IMAGE_ACCEPT, MAX_UPLOAD_MB as MAX_MB, normalizeImage } from "@/lib/nor
 
 /** Drop zone — a valid selection immediately triggers `onFile` (which auto-starts analysis). */
 export function ImageUpload({ onFile }: { onFile: (f: File) => void }) {
+ const { t } = useLanguage();
   const input = useRef<HTMLInputElement>(null);
   const [drag, setDrag] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,7 +24,7 @@ export function ImageUpload({ onFile }: { onFile: (f: File) => void }) {
 
   return (
     <div>
-      <input ref={input} type="file" accept={IMAGE_ACCEPT} className="sr-only" aria-label="Choose crop image" onChange={(e) => { void accept(e.target.files?.[0]); e.target.value = ""; }} />
+      <input ref={input} type="file" accept={IMAGE_ACCEPT} className="sr-only" aria-label={t("Choose crop image")} onChange={(e) => { void accept(e.target.files?.[0]); e.target.value = ""; }} />
       <button
         type="button"
         onClick={() => input.current?.click()}
@@ -35,11 +37,11 @@ export function ImageUpload({ onFile }: { onFile: (f: File) => void }) {
         )}
       >
         <span className="grid h-16 w-16 place-items-center rounded-2xl bg-gradient-primary text-primary-foreground"><ImagePlus className="h-8 w-8" /></span>
-        <span className="font-display text-xl font-semibold">Drop a maize or wheat leaf image</span>
-        <span className="max-w-sm text-center text-sm text-muted-foreground">Analysis starts automatically as soon as you choose a photo. Any photo type (JPG, PNG, WEBP, HEIC, GIF…) · up to {MAX_MB} MB</span>
-        <span className="rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground">Browse Image</span>
+        <span className="font-display text-xl font-semibold">{t("Drop a maize or wheat leaf image")}</span>
+        <span className="max-w-sm text-center text-sm text-muted-foreground">{t("Analysis starts automatically as soon as you choose a photo. Any photo type (JPG, PNG, WEBP, HEIC, GIF…) · up to ")}{t(MAX_MB)} {t("MB")}</span>
+        <span className="rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground">{t("Browse Image")}</span>
       </button>
-      {error && <p role="alert" className="mt-3 text-sm text-destructive">{error}</p>}
+      {t(error && <p role="alert" className="mt-3 text-sm text-destructive">{t(error)}</p>)}
     </div>
   );
 }
