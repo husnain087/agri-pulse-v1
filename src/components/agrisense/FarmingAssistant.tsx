@@ -43,7 +43,7 @@ export function FarmingAssistant() {
         <header className="flex shrink-0 items-center gap-3 border-b bg-accent px-4 py-3">
           <img src={emblem} alt="" width={40} height={40} loading="lazy" className="h-10 w-10 object-contain" />
           <div className="min-w-0 flex-1"><h2 className="font-display text-sm font-semibold">AgriPulse AI</h2><p className="text-xs text-muted-foreground">{chatT("Smart Farming Assistant")}</p></div>
-          <Tooltip><TooltipTrigger asChild><Button variant="ghost" size="icon" aria-label="Clear chat" disabled={messages.length === 0 && !error} onClick={() => { void stop(); setMessages([]); clearError(); setCopyError(null); setDraft(""); input.current?.focus(); }}><Trash2 /></Button></TooltipTrigger><TooltipContent>Clear chat</TooltipContent></Tooltip>
+          <Tooltip><TooltipTrigger asChild><Button variant="ghost" size="icon" aria-label="Clear chat" disabled={messages.length === 0 && !error} onClick={() => { void stop(); setMessages([]); clearError(); setCopyError(null); setDraft(""); input.current?.focus(); }}><Trash2 /></Button></TooltipTrigger><TooltipContent>{chatT("Clear chat")}</TooltipContent></Tooltip>
           <Button variant="ghost" size="icon" aria-label="Close farming assistant" onClick={close}><X /></Button>
         </header>
         <div className="flex shrink-0 items-center justify-between gap-3 border-b px-4 py-2">
@@ -63,7 +63,7 @@ export function FarmingAssistant() {
                 <MessageContent dir="auto" className="break-words group-[.is-user]:bg-primary group-[.is-user]:text-primary-foreground">
                   {message.parts.map((part, index) => part.type === "text" ? message.role === "assistant" ? <MessageResponse key={index}>{part.text}</MessageResponse> : <p key={index} className="whitespace-pre-wrap">{part.text}</p> : null)}
                 </MessageContent>
-                {message.role === "assistant" && <MessageActions><MessageAction tooltip={copied === message.id ? "Copied" : "Copy response"} onClick={() => { void navigator.clipboard.writeText(text).then(() => { setCopied(message.id); setCopyError(null); }).catch(() => setCopyError("Could not copy the response. Please select and copy the text.")); }}>{copied === message.id ? <Check /> : <Copy />}</MessageAction></MessageActions>}
+                {message.role === "assistant" && <MessageActions><MessageAction tooltip={chatT(copied === message.id ? "Copied" : "Copy response")} onClick={() => { void navigator.clipboard.writeText(text).then(() => { setCopied(message.id); setCopyError(null); }).catch(() => setCopyError("Could not copy the response. Please select and copy the text.")); }}>{copied === message.id ? <Check /> : <Copy />}</MessageAction></MessageActions>}
               </Message>;
             })}
             {status === "submitted" && <div role="status" className="text-sm motion-reduce:[&_*]:animate-none"><Shimmer>{chatT("Thinking about your crop…")}</Shimmer></div>}

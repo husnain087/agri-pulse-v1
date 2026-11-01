@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label";
 
 export const Route = createFileRoute("/auth")({
   staticData: { sitemap: false },
-  head: () => ({ meta: [{ title: "Sign in — Agri Pulse" }, { name: "robots", content: "noindex, nofollow" }] }),
+  head: () => ({ meta: [{ title: "Sign in — Agri Pulse" }, { name: "description", content: "Sign in to Agri Pulse to privately save and review your crop analyses." }, { property: "og:title", content: "Sign in — Agri Pulse" }, { property: "og:description", content: "Access your private Agri Pulse crop prediction history." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: AuthPage,
 });
 

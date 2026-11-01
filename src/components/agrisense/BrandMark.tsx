@@ -5,7 +5,7 @@ import { Brain, type LucideIcon } from "lucide-react";
 export function BrandMark() {
  const { t: tr } = useLanguage();
   return (
-    <Link to="/" className="flex items-center gap-2 font-display text-lg font-bold">
+    <Link to="/" dir="ltr" className="flex items-center gap-2 font-display text-lg font-bold">
       <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground"><Brain className="h-5 w-5" /></span>
       {tr("Agri ")}<span className="text-primary">{tr("Pulse")}</span>
     </Link>

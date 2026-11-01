@@ -9,7 +9,7 @@ import { useDetection, isBusy } from "@/lib/detection-store";
 import { cn } from "@/lib/utils";
 import { AccountButton } from "@/components/agrisense/AccountButton";
 
-export const Route = createFileRoute("/_authenticated/dashboard")({ staticData: { sitemap: false }, component: DashboardLayout });
+export const Route = createFileRoute("/_authenticated/dashboard")({ staticData: { sitemap: false }, head: () => ({ meta: [{ title: "Crop Workspace — Agri Pulse" }, { name: "description", content: "Your private Agri Pulse crop intelligence workspace." }, { property: "og:title", content: "Crop Workspace — Agri Pulse" }, { property: "og:description", content: "Manage your private crop analyses and prediction history." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: DashboardLayout });
 
 const NAV = [
   { to: "/dashboard", label: "Overview", icon: LayoutDashboard, exact: true },
