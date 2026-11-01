@@ -5,20 +5,20 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import video from "@/assets/agripulse-ai-presentation-video.mp4.asset.json";
 
 export function VideoPresentationDialog() {
- const { t } = useLanguage();
+ const { t: tr } = useLanguage();
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size="lg" variant="outline"><PlayCircle /> {t("Video Presentation")}</Button>
+        <Button size="lg" variant="outline"><PlayCircle /> {tr("Video Presentation")}</Button>
       </DialogTrigger>
       <DialogContent className="flex max-h-[92dvh] w-[calc(100vw-2rem)] max-w-4xl flex-col rounded-lg">
         <DialogHeader className="pr-6">
-          <DialogTitle>{t("Agri Pulse Video Presentation")}</DialogTitle>
-          <DialogDescription>{t("Project presentation video · about 3¾ minutes")}</DialogDescription>
+          <DialogTitle>{tr("Agri Pulse Video Presentation")}</DialogTitle>
+          <DialogDescription>{tr("Project presentation video · about 3¾ minutes")}</DialogDescription>
         </DialogHeader>
         <div className="flex flex-wrap gap-2">
           <Button asChild>
-            <a href={video.url} download="agri-pulse-video-presentation.mp4"><Download /> {t("Download Video")}</a>
+            <a href={video.url} download="agri-pulse-video-presentation.mp4"><Download /> {tr("Download Video")}</a>
           </Button>
         </div>
         <div className="min-h-0 flex-1 overflow-auto rounded border bg-black">
@@ -27,7 +27,7 @@ export function VideoPresentationDialog() {
             controls
             playsInline
             preload="metadata"
-            aria-label={t("Agri Pulse video presentation")}
+            aria-label={tr("Agri Pulse video presentation")}
             className="mx-auto aspect-video w-full object-contain"
           />
         </div>

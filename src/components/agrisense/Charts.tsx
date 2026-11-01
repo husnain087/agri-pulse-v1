@@ -6,17 +6,17 @@ const COLORS = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--cha
 const tip = { contentStyle: { background: "var(--popover)", border: "1px solid var(--border)", borderRadius: 12, color: "var(--popover-foreground)" } };
 
 export function ChartCard({ title, children, className }: { title: string; children: ReactNode; className?: string }) {
- const { t } = useLanguage();
+ const { t: tr } = useLanguage();
   return (
     <div className={`surface rounded-2xl p-5 ${className ?? ""}`}>
-      <h3 className="mb-4 font-semibold">{t(title)}</h3>
-      <div className="h-64">{t(children)}</div>
+      <h3 className="mb-4 font-semibold">{tr(title)}</h3>
+      <div className="h-64">{tr(children)}</div>
     </div>
   );
 }
 
 export function TimelineChart({ data }: { data: { date: string; count: number }[] }) {
- const { t } = useLanguage();
+ const { t: tr } = useLanguage();
   return (
     <ResponsiveContainer>
       <AreaChart data={data}>
@@ -32,12 +32,12 @@ export function TimelineChart({ data }: { data: { date: string; count: number }[
 }
 
 export function DonutChart({ data }: { data: { name: string; value: number }[] }) {
- const { t } = useLanguage();
+ const { t: tr } = useLanguage();
   return (
     <ResponsiveContainer>
       <PieChart>
-        <Pie data={data} dataKey="value" nameKey="name" innerRadius="55%" outerRadius="85%" paddingAngle={data.length > 1 ? 3 : 0} label={t(({ name, value }) => `${name} (${value})`)} fontSize={12}>
-          {t(data.map((d, i) => <Cell key={d.name} fill={d.name === "Diseased" ? "var(--chart-4)" : COLORS[i % COLORS.length]} />))}
+        <Pie data={data} dataKey="value" nameKey="name" innerRadius="55%" outerRadius="85%" paddingAngle={data.length > 1 ? 3 : 0} label={tr(({ name, value }) => `${name} (${value})`)} fontSize={12}>
+          {tr(data.map((d, i) => <Cell key={d.name} fill={d.name === "Diseased" ? "var(--chart-4)" : COLORS[i % COLORS.length]} />))}
         </Pie>
         <Tooltip {...tip} />
       </PieChart>
@@ -46,7 +46,7 @@ export function DonutChart({ data }: { data: { name: string; value: number }[] }
 }
 
 export function HBarChart({ data }: { data: { name: string; value: number }[] }) {
- const { t } = useLanguage();
+ const { t: tr } = useLanguage();
   return (
     <ResponsiveContainer>
       <BarChart data={data} layout="vertical" margin={{ left: 10 }}>

@@ -37,32 +37,32 @@ const FEATURES = [
 ];
 
 function Home() {
- const { t } = useLanguage();
+ const { t: tr } = useLanguage();
   return (
     <div>
       <section className="theme-night relative isolate overflow-hidden">
-        <img src={hero} alt={t("")} width={1920} height={1088} className="absolute inset-0 -z-20 h-full w-full object-cover opacity-45" />
+        <img src={hero} alt={tr("")} width={1920} height={1088} className="absolute inset-0 -z-20 h-full w-full object-cover opacity-45" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/60 via-background/70 to-background" />
-        {t(Array.from({ length: 14 }, (_, i) => (
+        {tr(Array.from({ length: 14 }, (_, i) => (
           <span key={i} aria-hidden className="absolute -z-10 h-1.5 w-1.5 rounded-full bg-primary/70 animate-float" style={{ left: `${(i * 37) % 100}%`, top: `${20 + ((i * 53) % 70)}%`, animationDelay: `${i * 0.4}s` }} />
         )))}
         <header className="mx-auto flex max-w-6xl items-center justify-between gap-3 flex-wrap px-5 py-5">
           <BrandMark />
           <nav className="hidden gap-7 text-sm text-muted-foreground md:flex">
-            <a href="#features" className="hover:text-foreground">{t("Features")}</a>
-            <a href="#how" className="hover:text-foreground">{t("How It Works")}</a>
-            <Link to="/dashboard/models" className="hover:text-foreground">{t("AI Models")}</Link>
+            <a href="#features" className="hover:text-foreground">{tr("Features")}</a>
+            <a href="#how" className="hover:text-foreground">{tr("How It Works")}</a>
+            <Link to="/dashboard/models" className="hover:text-foreground">{tr("AI Models")}</Link>
           </nav>
-          <div className="flex flex-wrap items-center gap-2"><Button asChild size="sm" variant="outline"><Link to="/dashboard">{t("Dashboard")}</Link></Button><LanguageSwitcher /><AccountButton /></div>
+          <div className="flex flex-wrap items-center gap-2"><Button asChild size="sm" variant="outline"><Link to="/dashboard">{tr("Dashboard")}</Link></Button><LanguageSwitcher /><AccountButton /></div>
         </header>
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-24 pt-12 lg:grid-cols-[1.1fr_1fr] lg:pt-20">
           <div className="animate-fade-up">
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary">{t("Agri Pulse")}</p>
-            <h1 className="mt-4 text-5xl font-bold leading-[1.05] md:text-6xl">{t("Smarter Farming Starts with ")}<span className="text-gradient">{t("AI")}</span></h1>
-            <p className="mt-6 max-w-xl text-lg text-muted-foreground">{t("Identify crops, detect maize and wheat diseases, and predict plant growth with Agri Pulse.")}</p>
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary">{tr("Agri Pulse")}</p>
+            <h1 className="mt-4 text-5xl font-bold leading-[1.05] md:text-6xl">{tr("Smarter Farming Starts with ")}<span className="text-gradient">{tr("AI")}</span></h1>
+            <p className="mt-6 max-w-xl text-lg text-muted-foreground">{tr("Identify crops, detect maize and wheat diseases, and predict plant growth with Agri Pulse.")}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="bg-gradient-primary glow"><Link to="/dashboard/detect">{t("Analyze My Crop ")}<ArrowRight /></Link></Button>
-              <Button asChild size="lg" variant="outline"><Link to="/dashboard">{t("Explore Dashboard")}</Link></Button>
+              <Button asChild size="lg" className="bg-gradient-primary glow"><Link to="/dashboard/detect">{tr("Analyze My Crop ")}<ArrowRight /></Link></Button>
+              <Button asChild size="lg" variant="outline"><Link to="/dashboard">{tr("Explore Dashboard")}</Link></Button>
               <ProjectReportDialog />
               <VideoPresentationDialog />
             </div>
@@ -70,8 +70,8 @@ function Home() {
           <div className="glass rounded-3xl p-5">
             <div className="mx-auto aspect-square max-w-sm"><NeuralBrainAnimation intensity={0.35} /></div>
             <ol className="mt-2 grid grid-cols-3 gap-2 text-center text-xs">
-              {t(["Crop Identification", "Disease Detection", "Heatmap Analysis"].map((t, i) => (
-                <li key={t} className="rounded-xl border bg-muted/50 px-2 py-3"><span className="block font-mono text-primary">{t("0")}{t(i + 1)}</span>{t(t)}</li>
+              {tr(["Crop Identification", "Disease Detection", "Heatmap Analysis"].map((t, i) => (
+                <li key={t} className="rounded-xl border bg-muted/50 px-2 py-3"><span className="block font-mono text-primary">{tr("0")}{tr(i + 1)}</span>{tr(t)}</li>
               )))}
             </ol>
           </div>
@@ -79,52 +79,52 @@ function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 pt-20">
-        <h2 className="text-3xl font-bold md:text-4xl">{t("Choose your analysis")}</h2>
+        <h2 className="text-3xl font-bold md:text-4xl">{tr("Choose your analysis")}</h2>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           <div className="theme-night relative flex flex-col overflow-hidden rounded-2xl p-6">
             <div className="pointer-events-none absolute -right-10 -top-10 h-56 w-56 opacity-60" aria-hidden><NeuralBrainAnimation intensity={0.4} /></div>
-            <p className="relative font-mono text-xs uppercase tracking-widest text-primary">{t("Option 1 · Trained ML models")}</p>
-            <h3 className="relative mt-2 flex items-center gap-2 text-2xl font-semibold"><ScanSearch className="h-6 w-6 shrink-0 text-primary" /> {t("Existing AI Models")}</h3>
-            <p className="mt-2 text-sm text-muted-foreground">{t("Crop Identifier → Maize or Wheat Disease AI with Grad-CAM heatmaps.")}</p>
+            <p className="relative font-mono text-xs uppercase tracking-widest text-primary">{tr("Option 1 · Trained ML models")}</p>
+            <h3 className="relative mt-2 flex items-center gap-2 text-2xl font-semibold"><ScanSearch className="h-6 w-6 shrink-0 text-primary" /> {tr("Existing AI Models")}</h3>
+            <p className="mt-2 text-sm text-muted-foreground">{tr("Crop Identifier → Maize or Wheat Disease AI with Grad-CAM heatmaps.")}</p>
             <div className="mt-auto flex flex-wrap gap-3 pt-6">
-              <Button asChild className="bg-gradient-primary glow"><Link to="/dashboard/detect">{t("Maize & Wheat Analyze ")}<ArrowRight /></Link></Button>
-              <Button asChild variant="outline"><Link to="/dashboard/models">{t("View models")}</Link></Button>
+              <Button asChild className="bg-gradient-primary glow"><Link to="/dashboard/detect">{tr("Maize & Wheat Analyze ")}<ArrowRight /></Link></Button>
+              <Button asChild variant="outline"><Link to="/dashboard/models">{tr("View models")}</Link></Button>
             </div>
           </div>
           <div className="theme-night relative flex flex-col overflow-hidden rounded-2xl p-6">
             <div className="pointer-events-none absolute -right-10 -top-10 h-56 w-56 opacity-60" aria-hidden><NeuralBrainAnimation intensity={0.4} /></div>
-            <p className="font-mono text-xs uppercase tracking-widest text-primary">{t("Option 2 · Growth Model")}</p>
-            <h3 className="mt-2 flex items-center gap-2 text-2xl font-semibold"><Sprout className="h-6 w-6 text-primary" /> {t("Plant Growth Risk & Prediction AI")}</h3>
-            <p className="mt-2 max-w-sm text-sm text-muted-foreground">{t("Predict growth rate and future height with the trained Agri Pulse growth model.")}</p>
-            <div className="mt-auto pt-6"><Button asChild className="bg-gradient-primary glow"><Link to="/plant-growth-risk"><Sprout /> {t("Detect Growth Risk")}</Link></Button></div>
+            <p className="font-mono text-xs uppercase tracking-widest text-primary">{tr("Option 2 · Growth Model")}</p>
+            <h3 className="mt-2 flex items-center gap-2 text-2xl font-semibold"><Sprout className="h-6 w-6 text-primary" /> {tr("Plant Growth Risk & Prediction AI")}</h3>
+            <p className="mt-2 max-w-sm text-sm text-muted-foreground">{tr("Predict growth rate and future height with the trained Agri Pulse growth model.")}</p>
+            <div className="mt-auto pt-6"><Button asChild className="bg-gradient-primary glow"><Link to="/plant-growth-risk"><Sprout /> {tr("Detect Growth Risk")}</Link></Button></div>
           </div>
           <div className="theme-night relative flex flex-col overflow-hidden rounded-2xl p-6 md:col-span-2">
             <div className="pointer-events-none absolute -right-10 -top-10 h-56 w-56 opacity-60" aria-hidden><NeuralBrainAnimation intensity={0.4} /></div>
-            <p className="relative font-mono text-xs uppercase tracking-widest text-primary">{t("Option 3 · EfficientNet-B0")}</p>
-            <h3 className="relative mt-2 flex items-center gap-2 text-2xl font-semibold"><Citrus className="h-6 w-6 text-primary" /> {t("Orange Disease Detection")}</h3>
-            <p className="relative mt-2 max-w-sm text-sm text-muted-foreground">{t("AI-based citrus disease classification with confidence scores for every class.")}</p>
-            <div className="relative mt-auto pt-6"><Button asChild className="bg-gradient-primary glow"><Link to="/orange-disease-detection"><Citrus /> {t("Open Detection Module")}</Link></Button></div>
+            <p className="relative font-mono text-xs uppercase tracking-widest text-primary">{tr("Option 3 · EfficientNet-B0")}</p>
+            <h3 className="relative mt-2 flex items-center gap-2 text-2xl font-semibold"><Citrus className="h-6 w-6 text-primary" /> {tr("Orange Disease Detection")}</h3>
+            <p className="relative mt-2 max-w-sm text-sm text-muted-foreground">{tr("AI-based citrus disease classification with confidence scores for every class.")}</p>
+            <div className="relative mt-auto pt-6"><Button asChild className="bg-gradient-primary glow"><Link to="/orange-disease-detection"><Citrus /> {tr("Open Detection Module")}</Link></Button></div>
           </div>
           <div className="theme-night relative flex flex-col overflow-hidden rounded-2xl p-6 transition-transform duration-300 hover:-translate-y-1 md:col-span-2">
             <div className="pointer-events-none absolute -right-10 -top-10 h-56 w-56 opacity-60" aria-hidden><NeuralBrainAnimation intensity={0.4} /></div>
-            <p className="relative font-mono text-xs uppercase tracking-widest text-primary">{t("Option 4 · Fertilizer Model")}</p>
-            <h3 className="relative mt-2 flex items-center gap-2 text-2xl font-semibold"><FlaskConical className="h-6 w-6 text-primary" /> {t("AI Fertilizer Recommendation")}</h3>
-            <p className="relative mt-2 max-w-sm text-sm text-muted-foreground">{t("Get the right fertilizer from your soil, crop and N-P-K values with a trained ML model.")}</p>
-            <div className="relative mt-auto pt-6"><Button asChild className="bg-gradient-primary glow transition-all duration-300 hover:scale-[1.03]"><Link to="/fertilizer-recommendation"><FlaskConical /> {t("AI Fertilizer Recommendation")}</Link></Button></div>
+            <p className="relative font-mono text-xs uppercase tracking-widest text-primary">{tr("Option 4 · Fertilizer Model")}</p>
+            <h3 className="relative mt-2 flex items-center gap-2 text-2xl font-semibold"><FlaskConical className="h-6 w-6 text-primary" /> {tr("AI Fertilizer Recommendation")}</h3>
+            <p className="relative mt-2 max-w-sm text-sm text-muted-foreground">{tr("Get the right fertilizer from your soil, crop and N-P-K values with a trained ML model.")}</p>
+            <div className="relative mt-auto pt-6"><Button asChild className="bg-gradient-primary glow transition-all duration-300 hover:scale-[1.03]"><Link to="/fertilizer-recommendation"><FlaskConical /> {tr("AI Fertilizer Recommendation")}</Link></Button></div>
           </div>
         </div>
       </section>
 
       <section id="features" className="mx-auto max-w-6xl scroll-mt-10 px-5 py-24">
-        <h2 className="text-3xl font-bold md:text-4xl">{t("Everything you need to read a leaf")}</h2>
-        <p className="mt-3 max-w-2xl text-muted-foreground">{t("Three deployed deep-learning models working as one pipeline — no manual crop selection, no fake results.")}</p>
+        <h2 className="text-3xl font-bold md:text-4xl">{tr("Everything you need to read a leaf")}</h2>
+        <p className="mt-3 max-w-2xl text-muted-foreground">{tr("Three deployed deep-learning models working as one pipeline — no manual crop selection, no fake results.")}</p>
         <ProjectInfoDialogs />
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {t(FEATURES.map(({ icon: Icon, t, d }) => (
+          {tr(FEATURES.map(({ icon: Icon, t, d }) => (
             <div key={t} className="surface rounded-2xl p-6 transition-transform hover:-translate-y-1">
               <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-primary"><Icon className="h-5 w-5" /></span>
-              <h3 className="mt-4 text-lg font-semibold">{t(t)}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{t(d)}</p>
+              <h3 className="mt-4 text-lg font-semibold">{tr(t)}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{tr(d)}</p>
             </div>
           )))}
         </div>
@@ -132,25 +132,25 @@ function Home() {
 
       <section id="how" className="scroll-mt-10 bg-secondary/60 py-24">
         <div className="mx-auto max-w-6xl px-5">
-          <h2 className="text-3xl font-bold md:text-4xl">{t("How it works")}</h2>
+          <h2 className="text-3xl font-bold md:text-4xl">{tr("How it works")}</h2>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
-            {t([
+            {tr([
               { icon: Upload, t: "Upload a crop image", d: "Drop a maize or wheat leaf photo. Analysis starts instantly." },
               { icon: Cpu, t: "AI picks the right model", d: "The Crop Identifier decides the crop and routes to its disease model." },
               { icon: BarChart3, t: "View your results", d: "Disease prediction, confidence score and heatmap — saved to history." },
             ].map(({ icon: Icon, t, d }, i) => (
               <div key={t} className="surface rounded-2xl p-6">
-                <div className="flex items-center gap-3"><span className="font-display text-4xl font-bold text-primary/30">{t("0")}{t(i + 1)}</span><Icon className="h-6 w-6 text-primary" /></div>
-                <h3 className="mt-4 text-lg font-semibold">{t(t)}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{t(d)}</p>
+                <div className="flex items-center gap-3"><span className="font-display text-4xl font-bold text-primary/30">{tr("0")}{tr(i + 1)}</span><Icon className="h-6 w-6 text-primary" /></div>
+                <h3 className="mt-4 text-lg font-semibold">{tr(t)}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{tr(d)}</p>
               </div>
             )))}
           </div>
-          <div className="mt-12 text-center"><Button asChild size="lg"><Link to="/dashboard/detect">{t("Analyze My Crop ")}<ArrowRight /></Link></Button></div>
+          <div className="mt-12 text-center"><Button asChild size="lg"><Link to="/dashboard/detect">{tr("Analyze My Crop ")}<ArrowRight /></Link></Button></div>
         </div>
       </section>
 
-      <footer className="theme-night py-10 text-center text-sm text-muted-foreground">{t("Powered by ")}<span className="text-primary">{t("Muhammad Husnain Haider")}</span></footer>
+      <footer className="theme-night py-10 text-center text-sm text-muted-foreground">{tr("Powered by ")}<span className="text-primary">{tr("Muhammad Husnain Haider")}</span></footer>
     </div>
   );
 }

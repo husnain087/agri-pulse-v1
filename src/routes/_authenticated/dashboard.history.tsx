@@ -28,7 +28,7 @@ export const Route = createFileRoute("/_authenticated/dashboard/history")({
 });
 
 function HistoryPage() {
- const { t } = useLanguage();
+ const { t: tr } = useLanguage();
   const { records, loaded, storageError } = useHistory();
   const { id } = Route.useSearch();
   const nav = useNavigate({ from: Route.fullPath });
@@ -54,38 +54,38 @@ function HistoryPage() {
 
   return (
     <div className="animate-fade-up">
-      <PageHeader title={t("Prediction History")} sub={t("Completed predictions stored in your account. Available across devices when you sign in.")} />
-      {t(storageError && <p role="alert" className="mb-4 rounded-xl bg-muted p-3 text-sm text-destructive">{t(storageError)}</p>)}
-      {t(loaded && records.length === 0 ? (
-        <EmptyState title={t("Your history is empty")} body="Every completed analysis is saved here automatically." action={<Button asChild><Link to="/dashboard/detect"><ScanLine /> {t("Start a detection")}</Link></Button>} />
+      <PageHeader title={tr("Prediction History")} sub={tr("Completed predictions stored in your account. Available across devices when you sign in.")} />
+      {tr(storageError && <p role="alert" className="mb-4 rounded-xl bg-muted p-3 text-sm text-destructive">{tr(storageError)}</p>)}
+      {tr(loaded && records.length === 0 ? (
+        <EmptyState title={tr("Your history is empty")} body="Every completed analysis is saved here automatically." action={<Button asChild><Link to="/dashboard/detect"><ScanLine /> {tr("Start a detection")}</Link></Button>} />
       ) : (
         <div className="surface rounded-2xl p-5">
           <div className="grid gap-3 md:grid-cols-[1fr_auto_auto_auto_auto]">
-            <div className="relative"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" /><Input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("Search crop or disease")} className="pl-9" aria-label={t("Search")} /></div>
-            <Select value={crop} onValueChange={setCrop}><SelectTrigger className="md:w-36" aria-label={t("Filter crop")}><SelectValue /></SelectTrigger><SelectContent><SelectItem value="all">{t("All crops")}</SelectItem><SelectItem value="Maize">{t("Maize")}</SelectItem><SelectItem value="Wheat">{t("Wheat")}</SelectItem></SelectContent></Select>
-            <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="md:w-44" aria-label={t("Filter by date")} />
-            <Select value={sort} onValueChange={setSort}><SelectTrigger className="md:w-40" aria-label={t("Sort")}><SelectValue /></SelectTrigger><SelectContent><SelectItem value="new">{t("Newest first")}</SelectItem><SelectItem value="old">{t("Oldest first")}</SelectItem></SelectContent></Select>
+            <div className="relative"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" /><Input value={q} onChange={(e) => setQ(e.target.value)} placeholder={tr("Search crop or disease")} className="pl-9" aria-label={tr("Search")} /></div>
+            <Select value={crop} onValueChange={setCrop}><SelectTrigger className="md:w-36" aria-label={tr("Filter crop")}><SelectValue /></SelectTrigger><SelectContent><SelectItem value="all">{tr("All crops")}</SelectItem><SelectItem value="Maize">{tr("Maize")}</SelectItem><SelectItem value="Wheat">{tr("Wheat")}</SelectItem></SelectContent></Select>
+            <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="md:w-44" aria-label={tr("Filter by date")} />
+            <Select value={sort} onValueChange={setSort}><SelectTrigger className="md:w-40" aria-label={tr("Sort")}><SelectValue /></SelectTrigger><SelectContent><SelectItem value="new">{tr("Newest first")}</SelectItem><SelectItem value="old">{tr("Oldest first")}</SelectItem></SelectContent></Select>
             <AlertDialog>
-              <AlertDialogTrigger asChild><Button variant="outline" className="text-destructive"><Trash2 /> {t("Clear history")}</Button></AlertDialogTrigger>
+              <AlertDialogTrigger asChild><Button variant="outline" className="text-destructive"><Trash2 /> {tr("Clear history")}</Button></AlertDialogTrigger>
               <AlertDialogContent>
-                <AlertDialogHeader><AlertDialogTitle>{t("Clear all history?")}</AlertDialogTitle><AlertDialogDescription>{t("This permanently deletes all ")}{t(records.length)} {t("saved predictions from your account.")}</AlertDialogDescription></AlertDialogHeader>
-                <AlertDialogFooter><AlertDialogCancel>{t("Cancel")}</AlertDialogCancel><AlertDialogAction onClick={() => void clearRecords()}>{t("Delete all")}</AlertDialogAction></AlertDialogFooter>
+                <AlertDialogHeader><AlertDialogTitle>{tr("Clear all history?")}</AlertDialogTitle><AlertDialogDescription>{tr("This permanently deletes all ")}{tr(records.length)} {tr("saved predictions from your account.")}</AlertDialogDescription></AlertDialogHeader>
+                <AlertDialogFooter><AlertDialogCancel>{tr("Cancel")}</AlertDialogCancel><AlertDialogAction onClick={() => void clearRecords()}>{tr("Delete all")}</AlertDialogAction></AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
           </div>
-          <p className="mt-4 text-sm text-muted-foreground">{t(list.length)} {t("of ")}{t(records.length)} {t("records")}</p>
+          <p className="mt-4 text-sm text-muted-foreground">{tr(list.length)} {tr("of ")}{tr(records.length)} {tr("records")}</p>
           <ul className="mt-2 divide-y">
-            {t(list.map((r) => (
+            {tr(list.map((r) => (
               <RecordRow key={r.id} r={r} onClick={() => void nav({ search: { id: r.id } })}
-                trailing={<Button size="icon" variant="ghost" aria-label={t(`Delete ${r.disease} record`)} onClick={() => void deleteRecord(r.id)}><Trash2 /></Button>} />
+                trailing={<Button size="icon" variant="ghost" aria-label={tr(`Delete ${r.disease} record`)} onClick={() => void deleteRecord(r.id)}><Trash2 /></Button>} />
             )))}
           </ul>
         </div>
       ))}
       <Dialog open={!!selected} onOpenChange={(o) => !o && void nav({ search: {} })}>
         <DialogContent className="max-h-[90vh] max-w-5xl overflow-y-auto">
-          <DialogHeader><DialogTitle>{t("Prediction details")}</DialogTitle><DialogDescription>{t("Saved result from ")}{t(selected?.model)}</DialogDescription></DialogHeader>
-          {t(selected && <RecordView record={selected} />)}
+          <DialogHeader><DialogTitle>{tr("Prediction details")}</DialogTitle><DialogDescription>{tr("Saved result from ")}{tr(selected?.model)}</DialogDescription></DialogHeader>
+          {tr(selected && <RecordView record={selected} />)}
         </DialogContent>
       </Dialog>
     </div>

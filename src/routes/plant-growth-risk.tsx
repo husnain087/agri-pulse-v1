@@ -46,7 +46,7 @@ const FIELDS: { k: Key; l: string; t: "text" | "number"; ph?: string; required: 
 const idle: Record<GrowthStage, StageState> = { preprocess: "pending", analyze: "pending", result: "pending" };
 
 function PlantGrowthRisk() {
- const { t } = useLanguage();
+ const { t: tr } = useLanguage();
   const { user } = useAccount();
   const [saved, setSaved] = useState<SavedGrowth[]>([]);
   const [saveError, setSaveError] = useState("");
@@ -149,62 +149,62 @@ function PlantGrowthRisk() {
       <header className="theme-night">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 flex-wrap px-5 py-5">
           <BrandMark />
-          <div className="flex flex-wrap items-center gap-2"><Button asChild variant="outline" size="sm"><Link to="/"><ArrowLeft /> {t("Home")}</Link></Button><LanguageSwitcher /><AccountButton /></div>
+          <div className="flex flex-wrap items-center gap-2"><Button asChild variant="outline" size="sm"><Link to="/"><ArrowLeft /> {tr("Home")}</Link></Button><LanguageSwitcher /><AccountButton /></div>
         </div>
         <div className="mx-auto max-w-6xl px-5 pb-14 pt-6">
-          <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-primary"><Sprout className="h-4 w-4" /> {t("Option 2")}</p>
-          <h1 className="mt-3 text-4xl font-bold md:text-5xl">{t("Plant Growth Risk & Prediction AI")}</h1>
-          <p className="mt-3 max-w-2xl text-muted-foreground">{t("Growth rate and future height predicted by the trained Agri Pulse growth model.")}</p>
+          <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-primary"><Sprout className="h-4 w-4" /> {tr("Option 2")}</p>
+          <h1 className="mt-3 text-4xl font-bold md:text-5xl">{tr("Plant Growth Risk & Prediction AI")}</h1>
+          <p className="mt-3 max-w-2xl text-muted-foreground">{tr("Growth rate and future height predicted by the trained Agri Pulse growth model.")}</p>
         </div>
       </header>
 
       <main className="mx-auto max-w-6xl space-y-8 px-5 py-10">
-        {t(!user && <div className="surface flex flex-wrap items-center justify-between gap-3 rounded-xl p-4"><p className="text-sm text-muted-foreground">{t("Sign in to save growth predictions privately and review them across devices.")}</p><Button asChild variant="outline" size="sm"><Link to="/auth">{t("Sign in to save")}</Link></Button></div>)}
+        {tr(!user && <div className="surface flex flex-wrap items-center justify-between gap-3 rounded-xl p-4"><p className="text-sm text-muted-foreground">{tr("Sign in to save growth predictions privately and review them across devices.")}</p><Button asChild variant="outline" size="sm"><Link to="/auth">{tr("Sign in to save")}</Link></Button></div>)}
         <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
           <div className="surface rounded-2xl p-5">
-            <input ref={input} type="file" accept={IMAGE_ACCEPT} className="sr-only" aria-label={t("Choose plant image")} onChange={(e) => { void pick(e.target.files?.[0]); e.target.value = ""; }} />
+            <input ref={input} type="file" accept={IMAGE_ACCEPT} className="sr-only" aria-label={tr("Choose plant image")} onChange={(e) => { void pick(e.target.files?.[0]); e.target.value = ""; }} />
             <button type="button" onClick={() => input.current?.click()} onDragOver={(e) => e.preventDefault()} onDrop={(e) => { e.preventDefault(); void pick(e.dataTransfer.files[0]); }}
               className="flex aspect-square w-full flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border-2 border-dashed transition-colors hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-              {t(preview ? <img src={preview} alt={t("Selected plant")} className="h-full w-full object-cover" /> : (<>
+              {tr(preview ? <img src={preview} alt={tr("Selected plant")} className="h-full w-full object-cover" /> : (<>
                 <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-primary text-primary-foreground"><ImagePlus className="h-7 w-7" /></span>
-                <span className="font-semibold">{t("Upload a plant photo")}</span>
-                <span className="text-xs text-muted-foreground">{t("Any photo type (JPG, PNG, WEBP, HEIC…) · up to 50 MB")}</span>
+                <span className="font-semibold">{tr("Upload a plant photo")}</span>
+                <span className="text-xs text-muted-foreground">{tr("Any photo type (JPG, PNG, WEBP, HEIC…) · up to 50 MB")}</span>
               </>))}
             </button>
-            {t(fileErr && <p role="alert" className="mt-2 text-sm text-destructive">{t(fileErr)}</p>)}
+            {tr(fileErr && <p role="alert" className="mt-2 text-sm text-destructive">{tr(fileErr)}</p>)}
           </div>
           <div className="surface rounded-2xl p-6">
-            <h2 className="font-semibold">{t("Plant details")}</h2>
-            <p className="mt-1 text-sm text-muted-foreground">{t("All fields except variety are required by the growth model.")}</p>
+            <h2 className="font-semibold">{tr("Plant details")}</h2>
+            <p className="mt-1 text-sm text-muted-foreground">{tr("All fields except variety are required by the growth model.")}</p>
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              {t(FIELDS.map((f) => (
+              {tr(FIELDS.map((f) => (
                 <div key={f.k} className="space-y-1.5">
-                  <Label htmlFor={f.k}>{t(f.l)}{t(f.required && <span className="text-destructive"> {t("*")}</span>)}</Label>
-                  <Input id={f.k} type={f.t} inputMode={f.t === "number" ? "decimal" : undefined} min={f.min} max={f.max} step="any" placeholder={t(f.ph ?? "")} value={form[f.k] ?? ""} onChange={(e) => setForm((p) => ({ ...p, [f.k]: e.target.value }))} />
+                  <Label htmlFor={f.k}>{tr(f.l)}{tr(f.required && <span className="text-destructive"> {tr("*")}</span>)}</Label>
+                  <Input id={f.k} type={f.t} inputMode={f.t === "number" ? "decimal" : undefined} min={f.min} max={f.max} step="any" placeholder={tr(f.ph ?? "")} value={form[f.k] ?? ""} onChange={(e) => setForm((p) => ({ ...p, [f.k]: e.target.value }))} />
                 </div>
               )))}
             </div>
-            {t(formErr && <p role="alert" className="mt-4 text-sm text-destructive">{t(formErr)}</p>)}
-            <Button size="lg" className="mt-6 w-full bg-gradient-primary" disabled={!file || running} onClick={() => void run()}><Sprout /> {t("Predict Growth")}</Button>
+            {tr(formErr && <p role="alert" className="mt-4 text-sm text-destructive">{tr(formErr)}</p>)}
+            <Button size="lg" className="mt-6 w-full bg-gradient-primary" disabled={!file || running} onClick={() => void run()}><Sprout /> {tr("Predict Growth")}</Button>
           </div>
         </div>
 
-        {t(preview && states.preprocess !== "pending" && !(result?.ok) && <div ref={processingRef}><GrowthProcessing image={preview} states={states} /></div>)}
-        {t(result && !result.ok && (
+        {tr(preview && states.preprocess !== "pending" && !(result?.ok) && <div ref={processingRef}><GrowthProcessing image={preview} states={states} /></div>)}
+        {tr(result && !result.ok && (
           <div role="alert" className="surface flex flex-wrap items-center justify-between gap-3 rounded-xl p-4">
-            <p className="flex items-center gap-2 text-sm"><AlertTriangle className="h-4 w-4 text-destructive" />{t(result.message)}</p>
-            <Button variant="outline" onClick={() => void run()}><RotateCcw /> {t("Retry")}</Button>
+            <p className="flex items-center gap-2 text-sm"><AlertTriangle className="h-4 w-4 text-destructive" />{tr(result.message)}</p>
+            <Button variant="outline" onClick={() => void run()}><RotateCcw /> {tr("Retry")}</Button>
           </div>
         ))}
-        {t(result?.ok && preview && <GrowthResults data={result.data} image={preview} analyzedAt={result.at} />)}
-        {t(saveError && <p role="alert" className="rounded-xl bg-muted p-4 text-sm text-destructive">{t(saveError)}</p>)}
-        {t(user && <section className="surface rounded-2xl p-6">
-          <h2 className="text-xl font-semibold">{t("Your saved growth predictions")}</h2>
-          <p className="mt-1 text-sm text-muted-foreground">{t("Private to your account. Select a prediction to review the full result.")}</p>
-          {t(historyLoading ? <p className="mt-4 text-sm text-muted-foreground">{t("Loading saved predictions…")}</p> : saved.length === 0 ? <p className="mt-4 text-sm text-muted-foreground">{t("Your next completed growth prediction will be saved here automatically.")}</p> : <ul className="mt-4 divide-y">{t(saved.map((row) => <li key={row.id}><button className="flex w-full items-center gap-3 rounded-lg py-3 text-left hover:bg-muted/50" onClick={() => { runId.current++; setPreview(row.image); setResult({ ok: true, data: row.data, at: row.at }); setStates({ preprocess: "done", analyze: "done", result: "done" }); }}><img src={row.image} alt={t("Saved plant")} className="h-12 w-12 rounded-lg object-cover" /><span className="min-w-0 flex-1"><span className="block font-medium">{t(row.fields.plant_species)} {t("· ")}{t(row.fields.plant_variety)}</span><span className="text-xs text-muted-foreground">{t(new Date(row.at).toLocaleString())}</span></span><span className="text-sm text-primary">{t("View result")}</span></button></li>))}</ul>)}
+        {tr(result?.ok && preview && <GrowthResults data={result.data} image={preview} analyzedAt={result.at} />)}
+        {tr(saveError && <p role="alert" className="rounded-xl bg-muted p-4 text-sm text-destructive">{tr(saveError)}</p>)}
+        {tr(user && <section className="surface rounded-2xl p-6">
+          <h2 className="text-xl font-semibold">{tr("Your saved growth predictions")}</h2>
+          <p className="mt-1 text-sm text-muted-foreground">{tr("Private to your account. Select a prediction to review the full result.")}</p>
+          {tr(historyLoading ? <p className="mt-4 text-sm text-muted-foreground">{tr("Loading saved predictions…")}</p> : saved.length === 0 ? <p className="mt-4 text-sm text-muted-foreground">{tr("Your next completed growth prediction will be saved here automatically.")}</p> : <ul className="mt-4 divide-y">{tr(saved.map((row) => <li key={row.id}><button className="flex w-full items-center gap-3 rounded-lg py-3 text-left hover:bg-muted/50" onClick={() => { runId.current++; setPreview(row.image); setResult({ ok: true, data: row.data, at: row.at }); setStates({ preprocess: "done", analyze: "done", result: "done" }); }}><img src={row.image} alt={tr("Saved plant")} className="h-12 w-12 rounded-lg object-cover" /><span className="min-w-0 flex-1"><span className="block font-medium">{tr(row.fields.plant_species)} {tr("· ")}{tr(row.fields.plant_variety)}</span><span className="text-xs text-muted-foreground">{tr(new Date(row.at).toLocaleString())}</span></span><span className="text-sm text-primary">{tr("View result")}</span></button></li>))}</ul>)}
         </section>)}
       </main>
-      <footer className="theme-night py-10 text-center text-sm text-muted-foreground">{t("Powered by ")}<span className="text-primary">{t("Muhammad Husnain Haider")}</span></footer>
+      <footer className="theme-night py-10 text-center text-sm text-muted-foreground">{tr("Powered by ")}<span className="text-primary">{tr("Muhammad Husnain Haider")}</span></footer>
     </div>
   );
 }

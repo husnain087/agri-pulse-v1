@@ -23,23 +23,23 @@ export const Route = createFileRoute("/_authenticated/dashboard/detect")({
 });
 
 function Detect() {
- const { t } = useLanguage();
+ const { t: tr } = useLanguage();
   const s = useDetection();
   const { storageError } = useHistory();
   return (
     <div className="animate-fade-up">
-      <PageHeader title={t("New Detection")} sub={t("Just choose a photo — crop identification, model selection and diagnosis run automatically.")} />
-      {t(s.phase === "idle" && <div className="mx-auto max-w-3xl"><ImageUpload onFile={(f) => startDetection(f)} /></div>)}
-      {t(s.phase !== "idle" && s.phase !== "done" && <AnalysisStage s={s} />)}
-      {t(s.phase === "done" && s.record && (
+      <PageHeader title={tr("New Detection")} sub={tr("Just choose a photo — crop identification, model selection and diagnosis run automatically.")} />
+      {tr(s.phase === "idle" && <div className="mx-auto max-w-3xl"><ImageUpload onFile={(f) => startDetection(f)} /></div>)}
+      {tr(s.phase !== "idle" && s.phase !== "done" && <AnalysisStage s={s} />)}
+      {tr(s.phase === "done" && s.record && (
         <>
-          {t(storageError && <p role="alert" className="mb-4 rounded-xl bg-muted p-3 text-sm text-destructive">{t(storageError)}</p>)}
+          {tr(storageError && <p role="alert" className="mb-4 rounded-xl bg-muted p-3 text-sm text-destructive">{tr(storageError)}</p>)}
           <RecordView
             record={s.record}
             original={s.preview}
             actions={<>
-              <Button size="lg" onClick={cancelDetection}><Upload /> {t("Upload Another Image")}</Button>
-              <Button size="lg" variant="outline" asChild><Link to="/dashboard/history"><History /> {t("View Prediction History")}</Link></Button>
+              <Button size="lg" onClick={cancelDetection}><Upload /> {tr("Upload Another Image")}</Button>
+              <Button size="lg" variant="outline" asChild><Link to="/dashboard/history"><History /> {tr("View Prediction History")}</Link></Button>
             </>}
           />
         </>

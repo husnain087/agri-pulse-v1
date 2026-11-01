@@ -30,7 +30,7 @@ const INFO: Record<ApiKey, { purpose: string; classes: string; icon: typeof Leaf
 };
 
 function Models() {
- const { t } = useLanguage();
+ const { t: tr } = useLanguage();
   const s = useDetection();
   const cards = cardStates(s);
   const [h, setH] = useState<Record<ApiKey, Health>>({ crop: "checking", maize: "checking", wheat: "checking" });
@@ -46,26 +46,26 @@ function Models() {
   return (
     <div className="animate-fade-up">
       <div className="flex flex-wrap items-start justify-between gap-4">
-        <PageHeader title={t("AI Models")} sub={t("Availability is shown as Online only when the service's health check actually responds.")} />
-        <Button variant="outline" onClick={run}><RefreshCw /> {t("Recheck")}</Button>
+        <PageHeader title={tr("AI Models")} sub={tr("Availability is shown as Online only when the service's health check actually responds.")} />
+        <Button variant="outline" onClick={run}><RefreshCw /> {tr("Recheck")}</Button>
       </div>
       <div className="grid gap-4 lg:grid-cols-3">
-        {t((Object.keys(API) as ApiKey[]).map((k, i) => {
+        {tr((Object.keys(API) as ApiKey[]).map((k, i) => {
           const Icon = INFO[k].icon;
           return (
             <div key={k} className="surface flex flex-col rounded-2xl p-6">
               <div className="flex items-center justify-between">
                 <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-primary"><Icon className="h-5 w-5" /></span>
-                <Badge variant="outline">{t(runLabel(k))}</Badge>
+                <Badge variant="outline">{tr(runLabel(k))}</Badge>
               </div>
-              <p className="mt-4 font-mono text-xs text-muted-foreground">{t("0")}{t(i + 1)}</p>
-              <h3 className="text-xl font-semibold">{t(API[k].name)}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{t(INFO[k].purpose)}</p>
-              <p className="mt-3 text-xs text-muted-foreground">{t("Classes: ")}{t(INFO[k].classes)}</p>
-              <p className="mt-4 break-all rounded-lg bg-muted p-2 font-mono text-xs">{t(API[k].base)}</p>
+              <p className="mt-4 font-mono text-xs text-muted-foreground">{tr("0")}{tr(i + 1)}</p>
+              <h3 className="text-xl font-semibold">{tr(API[k].name)}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{tr(INFO[k].purpose)}</p>
+              <p className="mt-3 text-xs text-muted-foreground">{tr("Classes: ")}{tr(INFO[k].classes)}</p>
+              <p className="mt-4 break-all rounded-lg bg-muted p-2 font-mono text-xs">{tr(API[k].base)}</p>
               <p className="mt-4 flex items-center gap-2 text-sm">
                 <span className={cn("h-2.5 w-2.5 rounded-full", h[k] === "online" ? "bg-success" : h[k] === "offline" ? "bg-destructive" : "animate-pulse bg-muted-foreground")} />
-                {t(h[k] === "online" ? "Online — health check passed" : h[k] === "offline" ? "Unreachable / not verified" : "Checking…")}
+                {tr(h[k] === "online" ? "Online — health check passed" : h[k] === "offline" ? "Unreachable / not verified" : "Checking…")}
               </p>
             </div>
           );
