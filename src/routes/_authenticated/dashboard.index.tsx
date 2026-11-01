@@ -13,6 +13,8 @@ export const Route = createFileRoute("/_authenticated/dashboard/")({
   staticData: { sitemap: false },
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Dashboard — Agri Pulse" },
       { name: "description", content: "Overview of your crop predictions, disease findings and trends." },
       { property: "og:title", content: "Dashboard — Agri Pulse" },

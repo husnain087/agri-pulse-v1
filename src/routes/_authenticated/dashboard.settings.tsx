@@ -12,6 +12,8 @@ export const Route = createFileRoute("/_authenticated/dashboard/settings")({
   staticData: { sitemap: false },
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Settings — Agri Pulse" },
       { name: "description", content: "Manage private account prediction storage and view Agri Pulse service configuration." },
       { property: "og:title", content: "Settings — Agri Pulse" },

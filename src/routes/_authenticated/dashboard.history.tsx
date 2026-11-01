@@ -18,6 +18,8 @@ export const Route = createFileRoute("/_authenticated/dashboard/history")({
   validateSearch: (s: Record<string, unknown>): { id?: string } => (typeof s["id"] === "string" ? { id: s["id"] } : {}),
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Prediction History — Agri Pulse" },
       { name: "description", content: "Search, filter and review every crop prediction saved to your account." },
       { property: "og:title", content: "Prediction History — Agri Pulse" },

@@ -14,6 +14,8 @@ export const Route = createFileRoute("/_authenticated/dashboard/models")({
   staticData: { sitemap: false },
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "AI Models — Agri Pulse" },
       { name: "description", content: "Live availability and run status of the crop identifier, maize and wheat disease models." },
       { property: "og:title", content: "AI Models — Agri Pulse" },
