@@ -1,5 +1,5 @@
 # Tasks
-- [ ] Add floating English/Urdu voice controls and verify navigation and assistant integration.
+- [x] Add floating English/Urdu voice controls; verified navigation, assistant drafts, permission errors and mobile display with simulated speech events. Real microphone recognition depends on browser support.
 - [x] Add whole-site English/Urdu selection and independently selectable farming-chat reply language; verify switching and Urdu replies.
 - [x] Add session-only Gemini farming assistant with floating chat, secure connection and safety guidance.
 - [x] Verify real chat, context validation, input safety and mobile display; connected Gemini returns real Urdu replies.
