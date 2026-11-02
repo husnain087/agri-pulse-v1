@@ -11,7 +11,7 @@ export function parseVoiceCommand(transcript: string): VoiceAction | null {
   if (!text) return null;
   // Questions are drafted for review, never sent without a farmer's confirmation.
   const question = transcript.trim().match(/^(?:ask assistant|ask farming assistant|سوال|اسسٹنٹ سے پوچھو)\s+(.+)$/i);
-  if (question) return { type: "assistant", open: true, draft: question[1] };
+  if (question?.[1]) return { type: "assistant", open: true, draft: question[1] };
   if (/^(?:(?:switch|change|set)(?: the)? language to |(?:speak|use) )?(?:urdu|اردو)(?: زبان)?(?: میں)?(?: کرو|کریں|kar do)?$/.test(text)) return { type: "language", language: "ur" };
   if (/^(?:(?:switch|change|set)(?: the)? language to |(?:speak|use) )?(?:english|انگریزی)(?: زبان)?(?: میں)?(?: کرو|کریں|kar do)?$/.test(text)) return { type: "language", language: "en" };
   if (/^(?:scroll down|نیچے جاؤ|نیچے جائیں|neeche jao)$/.test(text)) return { type: "scroll", direction: "down" };
