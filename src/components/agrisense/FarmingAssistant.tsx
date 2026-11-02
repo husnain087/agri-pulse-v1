@@ -11,6 +11,7 @@ import { Shimmer } from "@/components/ai-elements/shimmer";
 import { ASSISTANT_NAME, SUGGESTIONS, WELCOME, type ChatLanguage } from "@/lib/farming-assistant";
 import { useLanguage, translateText } from "@/lib/site-language";
 import emblem from "@/assets/farming-assistant.png";
+import { VOICE_ASSISTANT_EVENT } from "@/lib/voice-commands";
 
 const transport = new DefaultChatTransport({ api: "/api/farming-chat" });
 
@@ -27,6 +28,16 @@ export function FarmingAssistant() {
   const launcher = useRef<HTMLButtonElement>(null);
   const { messages, sendMessage, status, error, stop, setMessages, clearError } = useChat({ id: "agripulse-session", transport });
   const busy = status === "submitted" || status === "streaming";
+  useEffect(() => {
+    const handleVoice = (event: Event) => {
+      const detail: unknown = (event as CustomEvent<unknown>).detail;
+      if (!detail || typeof detail !== "object" || !("open" in detail) || typeof detail.open !== "boolean") return;
+      setOpen(detail.open);
+      if ("draft" in detail && typeof detail.draft === "string") setDraft(detail.draft.slice(0, 12000));
+    };
+    window.addEventListener(VOICE_ASSISTANT_EVENT, handleVoice);
+    return () => window.removeEventListener(VOICE_ASSISTANT_EVENT, handleVoice);
+  }, []);
   useEffect(() => {
     if (open) input.current?.focus();
   }, [open, status]);
