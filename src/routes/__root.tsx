@@ -16,6 +16,7 @@ import { setHistoryOwner } from "@/lib/history-store";
 import { cancelDetection } from "@/lib/detection-store";
 import { FarmingAssistant } from "@/components/agrisense/FarmingAssistant";
 import { LanguageProvider } from "@/lib/site-language";
+import { VoiceControls } from "@/components/agrisense/VoiceControls";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -157,7 +158,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <LanguageProvider><AuthContext.Provider value={auth}><Outlet /><FarmingAssistant key={auth.user?.id ?? "public"} /></AuthContext.Provider></LanguageProvider>
+      <LanguageProvider><AuthContext.Provider value={auth}><Outlet /><FarmingAssistant key={auth.user?.id ?? "public"} /><VoiceControls key={`voice-${auth.user?.id ?? "public"}`} /></AuthContext.Provider></LanguageProvider>
     </QueryClientProvider>
   );
 }
