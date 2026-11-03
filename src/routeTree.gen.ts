@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as FertilizerRecommendationRouteImport } from './routes/fertilizer-recommendation'
 import { Route as OrangeDiseaseDetectionRouteImport } from './routes/orange-disease-detection'
+import { Route as OtherCropIdentifierRouteImport } from './routes/other-crop-identifier'
 import { Route as PlantGrowthRiskRouteImport } from './routes/plant-growth-risk'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
@@ -50,6 +51,11 @@ const FertilizerRecommendationRoute =
 const OrangeDiseaseDetectionRoute = OrangeDiseaseDetectionRouteImport.update({
   id: '/orange-disease-detection',
   path: '/orange-disease-detection',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OtherCropIdentifierRoute = OtherCropIdentifierRouteImport.update({
+  id: '/other-crop-identifier',
+  path: '/other-crop-identifier',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlantGrowthRiskRoute = PlantGrowthRiskRouteImport.update({
@@ -125,6 +131,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/fertilizer-recommendation': typeof FertilizerRecommendationRoute
   '/orange-disease-detection': typeof OrangeDiseaseDetectionRoute
+  '/other-crop-identifier': typeof OtherCropIdentifierRoute
   '/plant-growth-risk': typeof PlantGrowthRiskRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
@@ -143,6 +150,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/fertilizer-recommendation': typeof FertilizerRecommendationRoute
   '/orange-disease-detection': typeof OrangeDiseaseDetectionRoute
+  '/other-crop-identifier': typeof OtherCropIdentifierRoute
   '/plant-growth-risk': typeof PlantGrowthRiskRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/farming-chat': typeof ApiFarmingChatRoute
@@ -162,6 +170,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/fertilizer-recommendation': typeof FertilizerRecommendationRoute
   '/orange-disease-detection': typeof OrangeDiseaseDetectionRoute
+  '/other-crop-identifier': typeof OtherCropIdentifierRoute
   '/plant-growth-risk': typeof PlantGrowthRiskRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
@@ -182,6 +191,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/fertilizer-recommendation'
     | '/orange-disease-detection'
+    | '/other-crop-identifier'
     | '/plant-growth-risk'
     | '/sitemap.xml'
     | '/dashboard'
@@ -200,6 +210,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/fertilizer-recommendation'
     | '/orange-disease-detection'
+    | '/other-crop-identifier'
     | '/plant-growth-risk'
     | '/sitemap.xml'
     | '/api/farming-chat'
@@ -218,6 +229,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/fertilizer-recommendation'
     | '/orange-disease-detection'
+    | '/other-crop-identifier'
     | '/plant-growth-risk'
     | '/sitemap.xml'
     | '/_authenticated/dashboard'
@@ -238,6 +250,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   FertilizerRecommendationRoute: typeof FertilizerRecommendationRoute
   OrangeDiseaseDetectionRoute: typeof OrangeDiseaseDetectionRoute
+  OtherCropIdentifierRoute: typeof OtherCropIdentifierRoute
   PlantGrowthRiskRoute: typeof PlantGrowthRiskRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiFarmingChatRoute: typeof ApiFarmingChatRoute
@@ -280,6 +293,13 @@ declare module '@tanstack/react-router' {
       path: '/orange-disease-detection'
       fullPath: '/orange-disease-detection'
       preLoaderRoute: typeof OrangeDiseaseDetectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/other-crop-identifier': {
+      id: '/other-crop-identifier'
+      path: '/other-crop-identifier'
+      fullPath: '/other-crop-identifier'
+      preLoaderRoute: typeof OtherCropIdentifierRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/plant-growth-risk': {
@@ -410,6 +430,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   FertilizerRecommendationRoute: FertilizerRecommendationRoute,
   OrangeDiseaseDetectionRoute: OrangeDiseaseDetectionRoute,
+  OtherCropIdentifierRoute: OtherCropIdentifierRoute,
   PlantGrowthRiskRoute: PlantGrowthRiskRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiFarmingChatRoute: ApiFarmingChatRoute,
