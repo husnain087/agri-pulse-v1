@@ -4,7 +4,7 @@ import { sitemapStaticPaths, sitemapXML } from "@/lib/sitemap";
 
 describe("Public sitemap", () => {
   it("includes public pages and excludes accounts and private dashboards", () => {
-    expect(sitemapStaticPaths(getRouter())).toEqual(["/", "/fertilizer-recommendation", "/orange-disease-detection", "/plant-growth-risk"]);
+    expect(sitemapStaticPaths(getRouter())).toEqual(["/", "/fertilizer-recommendation", "/orange-disease-detection", "/other-crop-identifier", "/plant-growth-risk"]);
   });
 
   it("uses the published origin without fabricated modification dates", () => {

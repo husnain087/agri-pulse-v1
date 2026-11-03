@@ -89,6 +89,7 @@ function Home() {
             <div className="mt-auto flex flex-wrap gap-3 pt-6">
               <Button asChild className="bg-gradient-primary glow"><Link to="/dashboard/detect">{tr("Maize & Wheat Analyze ")}<ArrowRight /></Link></Button>
               <Button asChild variant="outline"><Link to="/dashboard/models">{tr("View models")}</Link></Button>
+               <Button asChild variant="outline"><Link to="/other-crop-identifier"><ScanSearch /> {tr("Other Crop Identifier")}</Link></Button>
             </div>
           </div>
           <div className="theme-night relative flex flex-col overflow-hidden rounded-2xl p-6">
