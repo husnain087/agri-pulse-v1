@@ -1,4 +1,5 @@
 # Tasks
+- [x] Add Other Crop Identifier with secure AI photo analysis and English/Urdu output; real tomato identification, crop details, desktop/mobile display and six tests verified.
 - [x] Add floating English/Urdu voice controls; verified navigation, assistant drafts, permission errors and mobile display with simulated speech events. Real microphone recognition depends on browser support.
 - [x] Add whole-site English/Urdu selection and independently selectable farming-chat reply language; verify switching and Urdu replies.
 - [x] Add session-only Gemini farming assistant with floating chat, secure connection and safety guidance.
