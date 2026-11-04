@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ScanSearch, Upload, X, LoaderCircle, Leaf } from "lucide-react";
+import { ArrowLeft, ScanSearch, Upload, X, LoaderCircle, Leaf, ShieldCheck, TriangleAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BrandMark } from "@/components/agrisense/BrandMark";
 import { AccountButton } from "@/components/agrisense/AccountButton";
@@ -18,9 +18,9 @@ export const Route = createFileRoute("/other-crop-identifier")({
   staticData: { sitemap: true },
   head: () => ({ meta: [
     { title: "Other Crop Identifier — Agri Pulse" },
-    { name: "description", content: "Identify crops from a photo with Agri Pulse AI and explore visible features, growing conditions, common uses and care guidance." },
+    { name: "description", content: "Identify crops from photos with Agri Pulse AI, check visible rust and disease signs, and explore growing conditions and crop care." },
     { property: "og:title", content: "Other Crop Identifier — Agri Pulse" },
-    { property: "og:description", content: "Upload a crop photo for AI identification and crop details in English or Urdu." },
+    { property: "og:description", content: "Upload a crop photo for AI identification, visible rust and disease checks, and crop details in English or Urdu." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
   ] }),
@@ -85,7 +85,7 @@ function OtherCropPage() {
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-5">
         <BrandMark /><div className="flex flex-wrap items-center gap-2"><Button asChild size="sm" variant="outline"><Link to="/"><ArrowLeft />{tr("Home")}</Link></Button><LanguageSwitcher /><AccountButton /></div>
       </div>
-      <div className="mx-auto max-w-6xl px-5 pb-10 pt-6"><p className="flex items-center gap-2 text-sm text-primary"><ScanSearch className="h-4 w-4" />{tr("AI-Powered")}</p><h1 className="mt-3 text-4xl font-bold md:text-5xl">{tr("Other Crop Identifier")}</h1><p className="mt-3 max-w-2xl text-muted-foreground">{tr("Identify a crop from its photo and explore its growing conditions, uses and care.")}</p></div>
+      <div className="mx-auto max-w-6xl px-5 pb-10 pt-6"><p className="flex items-center gap-2 text-sm text-primary"><ScanSearch className="h-4 w-4" />{tr("AI-Powered")}</p><h1 className="mt-3 text-4xl font-bold md:text-5xl">{tr("Other Crop Identifier")}</h1><p className="mt-3 max-w-2xl text-muted-foreground">{tr("Identify your crop, check visible rust and disease signs, and explore growing details.")}</p></div>
     </header>
     <main className="mx-auto max-w-6xl px-5 py-10">
       <div className="grid items-start gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
@@ -122,6 +122,20 @@ function OtherCropPage() {
             </div>
           </div></div> : result ? <div dir={resultLanguage === "ur" ? "rtl" : "ltr"} className="space-y-6 break-words animate-fade-up">
             <div><p className="text-sm text-primary">{tr(result.status === "identified" ? "Identified crop" : result.status === "uncertain" ? "Identification uncertain" : "No crop identified")}</p><h2 className="mt-2 text-3xl font-bold">{result.cropName}</h2>{result.scientificName && <p dir="ltr" className="mt-1 text-sm italic text-muted-foreground">{result.scientificName}</p>}<p className="mt-3 leading-relaxed">{result.summary}</p></div>
+            <section aria-label={tr("Rust & disease check")} className="border-t pt-4">
+              <h3 className="text-lg font-semibold">{tr("Rust & disease check")}</h3>
+              <p className={cn("mt-3 flex items-center gap-2 font-semibold", result.health.status === "suspected_disease" ? "text-destructive" : result.health.status === "no_visible_disease" ? "text-primary" : "text-muted-foreground")}>
+                {result.health.status === "no_visible_disease" ? <ShieldCheck className="h-5 w-5 shrink-0" /> : <TriangleAlert className="h-5 w-5 shrink-0" />}
+                {tr(result.health.status === "suspected_disease" ? "Suspected disease detected" : result.health.status === "no_visible_disease" ? "No disease detected" : result.health.status === "uncertain" ? "Disease assessment uncertain" : "Disease assessment unavailable")}
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{result.health.summary}</p>
+              {result.health.diseases.map((disease, index) => <div key={index} className="mt-4 border-s-2 border-destructive ps-4">
+                <p className="text-xs font-medium text-muted-foreground">{tr(disease.kind === "rust" ? "Suspected rust" : "Suspected disease")}</p>
+                <h4 className="mt-1 font-semibold">{disease.name}</h4>
+                <ul className="mt-2 list-disc space-y-1 ps-5 text-sm text-muted-foreground">{disease.evidence.map((evidence, i) => <li key={i}>{evidence}</li>)}</ul>
+              </div>)}
+              {result.health.nextSteps.length > 0 && <div className="mt-4"><h4 className="text-sm font-semibold">{tr("Suggested next steps")}</h4><ul className="mt-2 list-disc space-y-2 ps-5 text-sm text-muted-foreground">{result.health.nextSteps.map((step, index) => <li key={index}>{step}</li>)}</ul></div>}
+            </section>
             {result.visibleFeatures.length > 0 && <Detail title={tr("Visible features")} items={result.visibleFeatures} />}
             {result.growingConditions && <Detail title={tr("Growing conditions")} text={result.growingConditions} />}
             {result.commonUses && <Detail title={tr("Common uses")} text={result.commonUses} />}

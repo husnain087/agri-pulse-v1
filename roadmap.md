@@ -1,4 +1,5 @@
 # Tasks
+- [ ] Add visible rust/disease assessment to Other Crop Identifier with named suspected diseases and a no-disease result; verify tests and real photo analysis.
 - [x] Add Other Crop Identifier with secure AI photo analysis and English/Urdu output; real tomato identification, crop details, desktop/mobile display and six tests verified.
 - [x] Make Other Crop Identifier its own home-page card (Option 2, renumbered 3–5) and add a model-running pipeline animation while identification is in flight; verified in preview with a real model call.
 - [x] Add floating English/Urdu voice controls; verified navigation, assistant drafts, permission errors and mobile display with simulated speech events. Real microphone recognition depends on browser support.
