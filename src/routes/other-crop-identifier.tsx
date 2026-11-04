@@ -7,6 +7,8 @@ import { BrandMark } from "@/components/agrisense/BrandMark";
 import { AccountButton } from "@/components/agrisense/AccountButton";
 import { LanguageSwitcher } from "@/components/agrisense/LanguageSwitcher";
 import { NeuralBrainAnimation } from "@/components/agrisense/NeuralBrainAnimation";
+import { ModelStatusCard } from "@/components/agrisense/ModelPipeline";
+import { cn } from "@/lib/utils";
 import { useLanguage } from "@/lib/site-language";
 import { IMAGE_ACCEPT, normalizeImage } from "@/lib/normalize-image";
 import { identifyOtherCrop } from "@/lib/other-crop.functions";
@@ -37,8 +39,16 @@ function OtherCropPage() {
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<CropIdentification | null>(null);
   const [resultLanguage, setResultLanguage] = useState(language);
+  const [stage, setStage] = useState(0);
   useEffect(() => () => { if (preview) URL.revokeObjectURL(preview); }, [preview]);
   useEffect(() => () => { generation.current++; }, []);
+  // Stage indicators advance while the real request is in flight; results show as soon as the model answers.
+  useEffect(() => {
+    if (!busy) return;
+    setStage(1);
+    const timers = [setTimeout(() => setStage(2), 900), setTimeout(() => setStage(3), 2200)];
+    return () => timers.forEach(clearTimeout);
+  }, [busy]);
 
   const pick = async (photo?: File) => {
     if (!photo || busy || preparing) return;
@@ -89,7 +99,28 @@ function OtherCropPage() {
           {error && <p role="alert" className="mt-4 text-sm text-destructive">{tr(error)}</p>}
         </div>
         <div className="min-w-0">
-          {busy ? <div role="status" className="theme-night rounded-lg p-6 text-center"><div className="mx-auto aspect-square max-w-xs"><NeuralBrainAnimation intensity={0.8} /></div><h2 className="mt-3 text-xl font-semibold">{tr("Identifying Crop")}</h2><p className="mt-2 text-sm text-muted-foreground">{tr("Examining your photo and preparing crop details…")}</p></div> : result ? <div dir={resultLanguage === "ur" ? "rtl" : "ltr"} className="space-y-6 break-words animate-fade-up">
+          {busy ? <div role="status" className="theme-night overflow-hidden rounded-3xl p-3 md:p-5"><div className="glass rounded-2xl p-5 md:p-8 animate-fade-up">
+            <div className="grid items-center gap-6 lg:grid-cols-[1.2fr_auto_1fr]">
+              <div className="relative mx-auto aspect-square w-full max-w-md"><NeuralBrainAnimation intensity={1} /></div>
+              <svg viewBox="0 0 80 300" className="hidden h-72 w-20 lg:block" aria-hidden fill="none" strokeWidth="2">
+                {[50, 150, 250].map((y, i) => (
+                  <path key={y} d={`M0 150 C 40 150, 40 ${y}, 80 ${y}`} className={cn("transition-all duration-500", stage > i ? "stroke-primary animate-flow" : "stroke-border")} strokeDasharray={stage > i ? "6 4" : undefined} />
+                ))}
+              </svg>
+              <div className="space-y-3">
+                <ModelStatusCard index="01" title={tr("Upload your photo")} state={stage >= 1 ? "done" : "waiting"} label={stage >= 1 ? "Completed" : "Waiting"} />
+                <ModelStatusCard index="02" title={tr("AI model is studying it")} state={stage === 1 ? "active" : stage >= 2 ? "done" : "waiting"} label={stage === 1 ? "Analyzing" : stage >= 2 ? "Completed" : "Waiting"} />
+                <ModelStatusCard index="03" title={tr("Preparing crop details")} state={stage === 2 ? "active" : stage >= 3 ? "done" : "waiting"} label={stage === 2 ? "Analyzing" : stage >= 3 ? "Completed" : "Waiting"} />
+              </div>
+            </div>
+            <div className="mt-6">
+              <p className="text-center font-display text-lg">{tr(stage === 1 ? "Identifying crop type..." : stage === 2 ? "AI model is studying the leaf and fruit features..." : "Preparing crop details and care guidance...")}</p>
+              <div className="mx-auto mt-3 flex max-w-sm gap-2" aria-label={tr(`Step ${stage} of 3`)}>
+                {[1, 2, 3].map((i) => <div key={i} className={cn("h-1.5 flex-1 rounded-full transition-colors duration-500", stage >= i ? "bg-gradient-primary" : "bg-muted")} />)}
+              </div>
+              <p className="mt-2 text-center font-mono text-xs text-muted-foreground">{tr("Step ")}{tr(stage)} {tr("/ 3 · Upload → Identify → Details")}</p>
+            </div>
+          </div></div> : result ? <div dir={resultLanguage === "ur" ? "rtl" : "ltr"} className="space-y-6 break-words animate-fade-up">
             <div><p className="text-sm text-primary">{tr(result.status === "identified" ? "Identified crop" : result.status === "uncertain" ? "Identification uncertain" : "No crop identified")}</p><h2 className="mt-2 text-3xl font-bold">{result.cropName}</h2>{result.scientificName && <p dir="ltr" className="mt-1 text-sm italic text-muted-foreground">{result.scientificName}</p>}<p className="mt-3 leading-relaxed">{result.summary}</p></div>
             {result.visibleFeatures.length > 0 && <Detail title={tr("Visible features")} items={result.visibleFeatures} />}
             {result.growingConditions && <Detail title={tr("Growing conditions")} text={result.growingConditions} />}

@@ -89,26 +89,32 @@ function Home() {
             <div className="mt-auto flex flex-wrap gap-3 pt-6">
               <Button asChild className="bg-gradient-primary glow"><Link to="/dashboard/detect">{tr("Maize & Wheat Analyze ")}<ArrowRight /></Link></Button>
               <Button asChild variant="outline"><Link to="/dashboard/models">{tr("View models")}</Link></Button>
-               <Button asChild variant="outline"><Link to="/other-crop-identifier"><ScanSearch /> {tr("Other Crop Identifier")}</Link></Button>
             </div>
           </div>
           <div className="theme-night relative flex flex-col overflow-hidden rounded-2xl p-6">
             <div className="pointer-events-none absolute -right-10 -top-10 h-56 w-56 opacity-60" aria-hidden><NeuralBrainAnimation intensity={0.4} /></div>
-            <p className="font-mono text-xs uppercase tracking-widest text-primary">{tr("Option 2 · Growth Model")}</p>
+            <p className="relative font-mono text-xs uppercase tracking-widest text-primary">{tr("Option 2 · AI Gateway")}</p>
+            <h3 className="relative mt-2 flex items-center gap-2 text-2xl font-semibold"><ScanSearch className="h-6 w-6 shrink-0 text-primary" /> {tr("Other Crop Identifier")}</h3>
+            <p className="relative mt-2 max-w-sm text-sm text-muted-foreground">{tr("Upload a photo of any crop and the AI identifies it with growing details.")}</p>
+            <div className="relative mt-auto pt-6"><Button asChild className="bg-gradient-primary glow"><Link to="/other-crop-identifier"><ScanSearch /> {tr("Other Crop Identifier")}</Link></Button></div>
+          </div>
+          <div className="theme-night relative flex flex-col overflow-hidden rounded-2xl p-6">
+            <div className="pointer-events-none absolute -right-10 -top-10 h-56 w-56 opacity-60" aria-hidden><NeuralBrainAnimation intensity={0.4} /></div>
+            <p className="font-mono text-xs uppercase tracking-widest text-primary">{tr("Option 3 · Growth Model")}</p>
             <h3 className="mt-2 flex items-center gap-2 text-2xl font-semibold"><Sprout className="h-6 w-6 text-primary" /> {tr("Plant Growth Risk & Prediction AI")}</h3>
             <p className="mt-2 max-w-sm text-sm text-muted-foreground">{tr("Predict growth rate and future height with the trained Agri Pulse growth model.")}</p>
             <div className="mt-auto pt-6"><Button asChild className="bg-gradient-primary glow"><Link to="/plant-growth-risk"><Sprout /> {tr("Detect Growth Risk")}</Link></Button></div>
           </div>
           <div className="theme-night relative flex flex-col overflow-hidden rounded-2xl p-6 md:col-span-2">
             <div className="pointer-events-none absolute -right-10 -top-10 h-56 w-56 opacity-60" aria-hidden><NeuralBrainAnimation intensity={0.4} /></div>
-            <p className="relative font-mono text-xs uppercase tracking-widest text-primary">{tr("Option 3 · EfficientNet-B0")}</p>
+            <p className="relative font-mono text-xs uppercase tracking-widest text-primary">{tr("Option 4 · EfficientNet-B0")}</p>
             <h3 className="relative mt-2 flex items-center gap-2 text-2xl font-semibold"><Citrus className="h-6 w-6 text-primary" /> {tr("Orange Disease Detection")}</h3>
             <p className="relative mt-2 max-w-sm text-sm text-muted-foreground">{tr("AI-based citrus disease classification with confidence scores for every class.")}</p>
             <div className="relative mt-auto pt-6"><Button asChild className="bg-gradient-primary glow"><Link to="/orange-disease-detection"><Citrus /> {tr("Open Detection Module")}</Link></Button></div>
           </div>
           <div className="theme-night relative flex flex-col overflow-hidden rounded-2xl p-6 transition-transform duration-300 hover:-translate-y-1 md:col-span-2">
             <div className="pointer-events-none absolute -right-10 -top-10 h-56 w-56 opacity-60" aria-hidden><NeuralBrainAnimation intensity={0.4} /></div>
-            <p className="relative font-mono text-xs uppercase tracking-widest text-primary">{tr("Option 4 · Fertilizer Model")}</p>
+            <p className="relative font-mono text-xs uppercase tracking-widest text-primary">{tr("Option 5 · Fertilizer Model")}</p>
             <h3 className="relative mt-2 flex items-center gap-2 text-2xl font-semibold"><FlaskConical className="h-6 w-6 text-primary" /> {tr("AI Fertilizer Recommendation")}</h3>
             <p className="relative mt-2 max-w-sm text-sm text-muted-foreground">{tr("Get the right fertilizer from your soil, crop and N-P-K values with a trained ML model.")}</p>
             <div className="relative mt-auto pt-6"><Button asChild className="bg-gradient-primary glow transition-all duration-300 hover:scale-[1.03]"><Link to="/fertilizer-recommendation"><FlaskConical /> {tr("AI Fertilizer Recommendation")}</Link></Button></div>
