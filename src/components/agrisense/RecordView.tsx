@@ -1,6 +1,7 @@
 import { useLanguage } from "@/lib/site-language";
 import { Info, Leaf, Download, Clock, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AnalyseResults } from "./AnalyseResults";
 import { prettyLabel } from "@/lib/agrisense-api";
 import { isHealthy, type PredictionRecord } from "@/lib/history-store";
 import type { ReactNode } from "react";
@@ -124,6 +125,7 @@ export function RecordView({ record: r, original, actions }: { record: Predictio
         </div>
       </div>
       <div className="flex flex-wrap justify-center gap-3">
+        <AnalyseResults model="crop-disease" result={{ crop: r.crop, cropConfidence: r.cropConfidence, cropProbabilities: r.cropProbabilities, disease: r.disease, confidence: r.confidence, probabilities: r.probabilities, model: r.model }} />
         {tr(actions)}
         <Button size="lg" variant="outline" onClick={() => void downloadReport(r, img)}><Download /> {tr("Download report")}</Button>
       </div>

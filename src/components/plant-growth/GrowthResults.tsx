@@ -2,6 +2,7 @@ import { useLanguage } from "@/lib/site-language";
 import { Cpu, Ruler, TrendingUp, Info, Thermometer, Droplets, Sun, CalendarClock, Leaf } from "lucide-react";
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 import { Badge } from "@/components/ui/badge";
+import { AnalyseResults } from "@/components/agrisense/AnalyseResults";
 import type { GrowthPrediction } from "@/lib/plant-growth/growth-api";
 
 const fmt = (v: unknown, d = 2) => (typeof v === "number" && Number.isFinite(v) ? v.toFixed(d) : "—");
@@ -17,6 +18,7 @@ export function GrowthResults({ data, image, analyzedAt }: { data: GrowthPredict
   const chart = data.chart_data ?? [];
   return (
     <div className="space-y-6 animate-fade-up">
+      <AnalyseResults model="plant-growth" result={{ plant_details: data.plant_details, prediction: data.prediction, environment: data.environment, model_name: data.model_name, chart_data: data.chart_data }} />
       <div className="flex items-start gap-3 rounded-2xl border border-primary/40 bg-primary/10 p-4 text-sm">
         <Cpu className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
         <p><strong>{tr("Prediction from the trained Agri Pulse growth model")}</strong>{tr(data.model_name ? ` (${data.model_name})` : "")}{tr(".")}</p>

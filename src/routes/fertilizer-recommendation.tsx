@@ -6,6 +6,7 @@ import { AlertTriangle, ArrowLeft, Brain, FlaskConical, Home, Leaf, RotateCcw, S
 import { Button } from "@/components/ui/button";
 import { BrandMark } from "@/components/agrisense/BrandMark";
 import { AccountButton } from "@/components/agrisense/AccountButton";
+import { AnalyseResults } from "@/components/agrisense/AnalyseResults";
 import { NeuralBrainAnimation } from "@/components/agrisense/NeuralBrainAnimation";
 import { FERT_OPTIONS, NUM_FIELDS, predictFertilizer, toFertInput, type FertInput, type FertPrediction, type SelectKey } from "@/lib/fertilizer/fertilizer-api";
 
@@ -183,6 +184,7 @@ function Results({ r, input, onAgain, onNew }: { r: FertPrediction; input: FertI
       </div>
       {tr(r.notice && <p className="text-sm text-muted-foreground">{tr(r.notice)}</p>)}
       <div className="flex flex-wrap gap-3">
+        <AnalyseResults model="fertilizer" result={{ predicted_fertilizer: r.predicted_fertilizer, model_probabilities: r.model_probabilities, input }} />
         <Button onClick={onAgain} className="bg-gradient-primary glow"><RotateCcw /> {tr("Try Again")}</Button>
         <Button variant="outline" onClick={onNew}><Sparkles /> {tr("Make Another Prediction")}</Button>
         <Button asChild variant="outline"><Link to="/"><Home /> {tr("Back to Home")}</Link></Button>

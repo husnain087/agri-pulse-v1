@@ -6,6 +6,7 @@ import { ArrowLeft, AlertTriangle, CheckCircle2, ChevronRight, Citrus, Download,
 import { Button } from "@/components/ui/button";
 import { BrandMark } from "@/components/agrisense/BrandMark";
 import { AccountButton } from "@/components/agrisense/AccountButton";
+import { AnalyseResults } from "@/components/agrisense/AnalyseResults";
 import { OrangeProcessing } from "@/components/orange/OrangeProcessing";
 import { ORANGE_MAX_MB, ORANGE_MIN_MS, ORANGE_MODEL, buildReport, infoFor, predictOrange, type OrangeResult } from "@/lib/orange/orange-api";
 
@@ -181,6 +182,7 @@ function Results({ r, at, image, onAgain, onDownload }: { r: OrangeResult; at: D
       ))}
 
       <div className="flex flex-wrap gap-3">
+        <AnalyseResults model="orange-disease" result={{ crop: "Orange", disease: r.disease, confidence: r.confidence, predictions: r.predictions, model: ORANGE_MODEL }} />
         <Button size="lg" onClick={onAgain}><Upload /> {tr("Analyze Another Image")}</Button>
         <Button size="lg" variant="outline" onClick={onDownload}><Download /> {tr("Download Report")}</Button>
         <Button size="lg" variant="outline" asChild><Link to="/dashboard"><LayoutDashboard /> {tr("Back to Dashboard")}</Link></Button>

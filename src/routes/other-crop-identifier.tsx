@@ -5,6 +5,7 @@ import { ArrowLeft, ScanSearch, Upload, X, LoaderCircle, Leaf, ShieldCheck, Tria
 import { Button } from "@/components/ui/button";
 import { BrandMark } from "@/components/agrisense/BrandMark";
 import { AccountButton } from "@/components/agrisense/AccountButton";
+import { AnalyseResults } from "@/components/agrisense/AnalyseResults";
 import { LanguageSwitcher } from "@/components/agrisense/LanguageSwitcher";
 import { NeuralBrainAnimation } from "@/components/agrisense/NeuralBrainAnimation";
 import { ModelStatusCard } from "@/components/agrisense/ModelPipeline";
@@ -121,6 +122,7 @@ function OtherCropPage() {
               <p className="mt-2 text-center font-mono text-xs text-muted-foreground">{tr("Step ")}{tr(stage)} {tr("/ 3 · Upload → Identify → Details")}</p>
             </div>
           </div></div> : result ? <div dir={resultLanguage === "ur" ? "rtl" : "ltr"} className="space-y-6 break-words animate-fade-up">
+            <AnalyseResults model="other-crop" result={result} />
             <div><p className="text-sm text-primary">{tr(result.status === "identified" ? "Identified crop" : result.status === "uncertain" ? "Identification uncertain" : "No crop identified")}</p><h2 className="mt-2 text-3xl font-bold">{result.cropName}</h2>{result.scientificName && <p dir="ltr" className="mt-1 text-sm italic text-muted-foreground">{result.scientificName}</p>}<p className="mt-3 leading-relaxed">{result.summary}</p></div>
             <section aria-label={tr("Rust & disease check")} className="border-t pt-4">
               <h3 className="text-lg font-semibold">{tr("Rust & disease check")}</h3>
