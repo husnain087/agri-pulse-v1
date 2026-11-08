@@ -11,6 +11,7 @@ import hero from "@/assets/hero-field.jpg";
 import { ProjectInfoDialogs } from "@/components/agrisense/ProjectInfoDialogs";
 import { ProjectReportDialog } from "@/components/agrisense/ProjectReportDialog";
 import { VideoPresentationDialog } from "@/components/agrisense/VideoPresentationDialog";
+import { StepByStepGuide } from "@/components/agrisense/StepByStepGuide";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
@@ -65,6 +66,7 @@ function Home() {
               <Button asChild size="lg" variant="outline"><Link to="/dashboard">{tr("Explore Dashboard")}</Link></Button>
               <ProjectReportDialog />
               <VideoPresentationDialog />
+              <StepByStepGuide />
             </div>
           </div>
           <div className="glass rounded-3xl p-5">

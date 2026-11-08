@@ -1,4 +1,5 @@
 # Tasks
+- [x] Add a Step-by-Step Guide button with seven bilingual steps, automatic narration and playback controls; desktop/mobile verified, five tests passed and simulated audio lifecycle verified. Actual voice output depends on browser/device voices; headless browser audio unavailable.
 - [x] Add Analyse Results to all five model result views, including shared saved-result views; verified real Lovable AI explanations, care/prevention, English/Urdu, desktop/mobile and 15 targeted tests.
 - [x] Add visible rust/disease assessment to Other Crop Identifier with named suspected diseases and a no-disease result; seven schema tests passed and real leaf photos retained uncertainty without inventing diagnoses.
 - [x] Add Other Crop Identifier with secure AI photo analysis and English/Urdu output; real tomato identification, crop details, desktop/mobile display and six tests verified.
